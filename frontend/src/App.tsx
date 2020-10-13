@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import PlayerCard from "./components/player";
-import styled from "styled-components";
+import Country from "./components/Country";
 
 interface IAppProps {}
 
@@ -26,7 +25,7 @@ function App() {
 
       {countries.slice(0, 10).map((country) => (
         <div className="CountryDiv">
-          <PlayerCard
+          <Country
             name={country.name}
             capital={country.capital}
             flagURL={country.flag}
@@ -37,17 +36,5 @@ function App() {
     </div>
   );
 }
-
-const Div = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  align-items: center;
-  text-align: center;
-  border-style: solid;
-  height: 300px;
-  width: 400px;
-  margin-right: 0;
-`;
 
 export default App;
