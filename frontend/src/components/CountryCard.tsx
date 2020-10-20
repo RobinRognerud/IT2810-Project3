@@ -2,14 +2,14 @@ import React from "react";
 
 interface ICountry {
   name: string;
-  currencies: Array<String>;
+  /*   currencies: Array<String>; */
   flagURL: string;
   capital: String;
 }
 
-const Country: React.FC<ICountry> = ({
+const CountryCard: React.FC<ICountry> = ({
   name,
-  currencies,
+  /*   currencies, */
   capital,
   flagURL,
 }) => {
@@ -17,10 +17,10 @@ const Country: React.FC<ICountry> = ({
     <div>
       <h1>{name}</h1>
       <p>{capital}</p>
-      <p>{currencies}</p>
+      {/*       <p>{currencies}</p> */}
       <img src={flagURL} alt="Country's flag" />
     </div>
   );
 };
 
-export default Country;
+export default CountryCard;
