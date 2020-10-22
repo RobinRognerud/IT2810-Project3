@@ -5,7 +5,6 @@ import { createLogger } from "redux-logger";
 import { countryReducer } from "./country/CountryReducer";
 import { AppActions } from "./models/actions";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { GetCountry } from "./country/CountryAction";
 
 const logger = createLogger();
 
