@@ -30,15 +30,11 @@ const Header:  React.FC<Iheader> = () => {
     <div className="container d-flex justify-content-between">
     <div className="navbar navbar-dark bg-dark box-shadow">
     <Link to={'/'}><strong
-        
-        
        >
             Countries
         
        </strong></Link>
        </div>
-
-     
      
      <label htmlFor="exampleSelect1">
     

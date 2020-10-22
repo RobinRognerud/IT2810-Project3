@@ -6,7 +6,6 @@ import { Route, Switch } from "react-router-dom";
 
 
 
-
  interface IAppProps {}
 
 function App() {
@@ -18,9 +17,6 @@ function App() {
         <Route path = "/CountryDetail" component={CountryDetail} exact/> 
       <Main/>
       </Switch>
-     
-      
-      
     </div>
   );
 }

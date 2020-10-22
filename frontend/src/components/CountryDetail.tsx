@@ -1,7 +1,8 @@
-import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { isTemplateSpan } from "typescript";
+import { GetCountry } from "../store/country/CountryAction";
+import { RootStore } from "../store/rootStore";
 import Header from "./Header";
 
 
@@ -14,61 +15,57 @@ interface ICountryDetail {
     languages: String;
     population: Number;
     area: Number;
-  
   }
 
-/* const CountryDetail: React.FC<ICountryDetail> = () => {
+const CountryDetail: React.FC = () => {
+    const dispatch = useDispatch();
+    const countryState = useSelector((state: RootStore) => state.countryReducer);
+  
+    console.log("country state", countryState);
 
-const [countries, setCountries] = useState<any[]>([]);
+  /* useEffect(() => {
+    dispatch(GetCountry());
+  }, []); */
 
-  useEffect(() => {
-    getCountries();
-  }, []);
+  function mapLang(info: any) {
+    const items = info.languages.map((lang: any) => 
+        <div><li><strong>Languages: </strong>  {lang.name} </li>
+        <li><strong>Languages: </strong>  {lang.nativeName}</li></div>
+    )
+    return items;
+  }
 
-  //Fetch the countries from API
-  const getCountries = async () => {
-    const response = await fetch("http://localhost:3000/countries");
-    const data = await response.json();
-    setCountries(data);
-    console.log(data);
-  };
- */
-
-const CountryDetail: React.FC<ICountryDetail> = ({
-  name,
-  currencies,
-  capital,
-  flagURL,
-  region,
-  languages,
-  population,
-  area
-}) => {
-  return (
-      
+    return (
    <div>
        <Header
-       
        />
-      
+      {countryState.countries.map((info) => 
+      info.currencies.map(currency => 
+       
    <div className="card mb-3 box-shadow">
     <img
-     className="card-img-top" src={flagURL} alt="Country's flag"
+     className="card-img-top" src={info.flag} alt="Country's flag"
     />
     <div className="card-body">
      <p className="card-text">
-  <li> <strong>Name: </strong> {name}</li>
-  <li><strong>Capital: </strong>  {capital}</li>
-  <li><strong>Currencies: </strong>  {currencies}</li>
-  <li><strong>Region: </strong>  {region}</li>
-  <li><strong>Languages: </strong>  {languages}</li>
-  <li><strong>Population: </strong>  {population}</li>
-  <li><strong>Area: </strong>  {area}</li>
+
+  <li> <strong>Name: </strong> {info.name}</li>
+  <li><strong>Capital: </strong>  {info.capital}</li>
+  <li><strong>Currencies: </strong>  {currency.name}</li>
+  <li><strong>Currencies: </strong>  {currency.code}</li>
+  <li><strong>Currencies: </strong>  {currency.symbol}</li>
+  <li><strong>Region: </strong>  {info.region}</li>
+  {mapLang(info)}
+  {/* <li><strong>Languages: </strong>  {lang.name } </li>
+  <li><strong>Languages: </strong>  {lang.nativeName}</li> */}
+  <li><strong>Population: </strong>  {info.population}</li>
+  <li><strong>Area: </strong>  {info.area}</li>
 
      </p>
      
     </div>
    </div>
+      ))}
   </div>
  );
     

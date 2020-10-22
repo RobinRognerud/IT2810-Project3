@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 
 interface ICountry {
   name: string;
-  currencies: Array<String>;
+  currencyName: string;
   flagURL: string;
   capital: String;
 }
 
-const Country: React.FC<ICountry> = ({
+const CountryCard: React.FC<ICountry> = ({
   name,
-  currencies,
+  currencyName,
   capital,
   flagURL,
 }) => {
@@ -25,7 +25,7 @@ const Country: React.FC<ICountry> = ({
      <li> <strong>Name: </strong> {name}</li>
 
   <li><strong>Capital: </strong>  {capital}</li>
-  <li><strong>Currencies: </strong>  {currencies}</li>
+  <li><strong>Currencies: </strong>  {currencyName}</li>
      </p>
      <div className="d-flex justify-content-between align-items-center">
       <div className="btn-group">
@@ -53,4 +53,4 @@ const Country: React.FC<ICountry> = ({
 
 };
 
-export default Country;
+export default CountryCard;
