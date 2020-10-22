@@ -19,6 +19,4 @@ export const store = createStore<AppState, AppActions, {}, {}>(
   )
 );
 
-/* store.dispatch(GetCountry()); */
-
 export type RootStore = ReturnType<typeof rootReducer>;
