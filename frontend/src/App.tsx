@@ -1,14 +1,22 @@
 import React from "react";
-import "./App.css";
-import MainPage from "./components/MainPage";
+import Main from './components/Main';
 
-interface IAppProps {}
+import CountryDetail from './components/CountryDetail';
+import { Route, Switch } from "react-router-dom";
+
+
+
+ interface IAppProps {}
 
 function App() {
+  
   return (
     <div className="App">
-      <h1>Countries</h1>
-      <MainPage />
+      <Switch>
+        <Route path= "/" component={Main} exact/>
+        <Route path = "/CountryDetail" component={CountryDetail} exact/> 
+      <Main/>
+      </Switch>
     </div>
   );
 }

@@ -6,7 +6,8 @@ import { RootStore } from "../store/rootStore";
 import { GetCountry } from "../store/country/CountryAction";
 import CountryCard from "./CountryCard";
 
-const MainPage: React.FC = () => {
+
+const CountryCardContainer: React.FC = () => {
   const dispatch = useDispatch();
   const [countryName, setCountryName] = useState("");
   const countryState = useSelector((state: RootStore) => state.countryReducer);
@@ -31,7 +32,7 @@ const MainPage: React.FC = () => {
           return country;
         }
       })
-      .slice(0, 8)
+      .slice(0, 9)
       .map((info) =>
         info.currencies.map((currency) => (
           <CountryCard
@@ -60,4 +61,4 @@ const MainPage: React.FC = () => {
   );
 };
 
-export default MainPage;
+export default CountryCardContainer;
