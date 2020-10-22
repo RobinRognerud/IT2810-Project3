@@ -1,6 +1,16 @@
+interface Currencies {
+  name: string;
+  code: string;
+  symbol: string;
+}
+
 export interface Country {
   name: string;
-  currencies: { name: string; code: string; symbol: string };
+  capital: string;
+  region: string;
   flag: string;
-  capital: String;
+  readonly currencies: Currencies[];
+  languages: { name: string; nativeName: string };
+  populatioin: number;
+  area: number;
 }

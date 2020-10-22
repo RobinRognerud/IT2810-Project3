@@ -13,6 +13,7 @@ export interface fetchCountrySucess {
 }
 export interface fetchCountryFailure {
   type: typeof FETCH_COUNTRY_FAILURE;
+  error: string;
 }
 
 export type CountryActionTypes =
