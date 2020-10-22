@@ -18,26 +18,42 @@ const MainPage: React.FC = () => {
 
   useEffect(() => {
     dispatch(GetCountry());
-  }, []);
+  }, [countryName]);
+
+  function generateCountriesBySearch() {
+    const items = countryState.countries
+      .filter((country) => {
+        if (countryName == null) return country;
+        else if (
+          country.name.toLowerCase().includes(countryName.toLowerCase()) ||
+          country.capital.toLowerCase().includes(countryName.toLowerCase())
+        ) {
+          return country;
+        }
+      })
+      .slice(0, 8)
+      .map((info) => (
+        <CountryCard
+          name={info.name}
+          capital={info.capital}
+          flagURL={info.flag}
+          /* currencies={info.currencies} */
+        />
+      ));
+    return items;
+  }
 
   return (
     <div>
-      <input type="text" />
+      <input type="text" onChange={handleChange} />
       <button onClick={handleSubmit}>Search</button>
-      {countryState.countries && (
-        <div>
-          {countryState.countries.map((info) => (
-            <div>
-              <CountryCard
-                name={info.name}
-                capital={info.capital}
-                flagURL={info.flag}
-                /* currencies={info.currencies} */
-              />
-            </div>
-          ))}
-        </div>
-      )}
+      <div>
+        {countryState.countries.length !== 0 ? (
+          generateCountriesBySearch()
+        ) : (
+          <p>{countryState.error}</p>
+        )}
+      </div>
     </div>
   );
 };

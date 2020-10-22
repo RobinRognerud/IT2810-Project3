@@ -10,12 +10,13 @@ import { Country } from "./models/Country";
 export interface CountryState {
   loading: boolean;
   readonly countries: Country[];
+  error: string;
 }
 
 const defaultState: CountryState = {
   loading: false,
   countries: [],
-  /*error: "", */
+  error: "",
 };
 
 export const countryReducer = (
@@ -27,20 +28,19 @@ export const countryReducer = (
       return {
         loading: true,
         countries: [],
-        /*error: "", */
+        error: "",
       };
     case FETCH_COUNTRY_SUCCESS:
       return {
         loading: false,
         countries: action.countries,
-        /* countries: action.country,
-        error: "", */
+        error: "",
       };
     case FETCH_COUNTRY_FAILURE:
       return {
         loading: false,
         countries: [],
-        /*error: action.error, */
+        error: "Something went wrong",
       };
     default:
       return state;
