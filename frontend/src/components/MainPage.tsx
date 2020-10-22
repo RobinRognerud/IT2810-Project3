@@ -32,14 +32,16 @@ const MainPage: React.FC = () => {
         }
       })
       .slice(0, 8)
-      .map((info) => (
-        <CountryCard
-          name={info.name}
-          capital={info.capital}
-          flagURL={info.flag}
-          /* currencies={info.currencies} */
-        />
-      ));
+      .map((info) =>
+        info.currencies.map((currency) => (
+          <CountryCard
+            name={info.name}
+            capital={info.capital}
+            flagURL={info.flag}
+            currencyName={currency.name}
+          />
+        ))
+      );
     return items;
   }
 
