@@ -9,6 +9,7 @@ import CountryCard from "./CountryCard";
 const MainPage: React.FC = () => {
   const dispatch = useDispatch();
   const [countryName, setCountryName] = useState("");
+  const [skipAmount, setSkipAmount] = useState(0);
   const countryState = useSelector((state: RootStore) => state.countryReducer);
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
     setCountryName(event.target.value);
@@ -17,8 +18,18 @@ const MainPage: React.FC = () => {
   console.log("country state", countryState);
 
   useEffect(() => {
-    dispatch(GetCountry());
-  }, [countryName]);
+    dispatch(GetCountry(skipAmount));
+  }, [countryName, skipAmount]);
+
+  function checkSkipAmount(x: string) {
+    if (x === "prev" && skipAmount === 0) {
+      return 0;
+    } else {
+      return skipAmount - 9;
+    }
+  }
+  const previousPage = () => setSkipAmount(checkSkipAmount("prev"));
+  const nextPage = () => setSkipAmount(skipAmount + 9);
 
   function generateCountriesBySearch() {
     const items = countryState.countries
@@ -31,7 +42,7 @@ const MainPage: React.FC = () => {
           return country;
         }
       })
-      .slice(0, 8)
+      .slice(0, 9)
       .map((info) =>
         info.currencies.map((currency) => (
           <CountryCard
@@ -56,6 +67,8 @@ const MainPage: React.FC = () => {
           <p>{countryState.error}</p>
         )}
       </div>
+      <button onClick={previousPage}>Previous page</button>
+      <button onClick={nextPage}>Next page</button>
     </div>
   );
 };

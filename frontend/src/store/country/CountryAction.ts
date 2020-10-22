@@ -16,18 +16,16 @@ export const GetCountry: ActionCreator<ThunkAction<
   CountryState,
   null,
   CountryActionTypes
->> = () => {
+>> = (skip) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch({
         type: FETCH_COUNTRY_REQUEST,
       });
 
-      const res = await axios.get(`http://localhost:4000/countries/`, {
-        params: {
-          _limit: 10,
-        },
-      });
+      const res = await axios.get(
+        `http://localhost:4000/countries/?skip=${skip}`
+      );
 
       dispatch({
         type: FETCH_COUNTRY_SUCCESS,
