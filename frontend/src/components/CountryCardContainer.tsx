@@ -3,35 +3,16 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { RootStore } from "../store/rootStore";
-import { GetCountry } from "../store/country/CountryAction";
 import CountryCard from "./CountryCard";
-
 
 const CountryCardContainer: React.FC = () => {
   const dispatch = useDispatch();
-  const [countryName, setCountryName] = useState("");
   const countryState = useSelector((state: RootStore) => state.countryReducer);
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setCountryName(event.target.value);
-  const handleSubmit = () => dispatch(GetCountry());
 
   console.log("country state", countryState);
 
-  useEffect(() => {
-    dispatch(GetCountry());
-  }, [countryName]);
-
   function generateCountriesBySearch() {
     const items = countryState.countries
-      .filter((country) => {
-        if (countryName == null) return country;
-        else if (
-          country.name.toLowerCase().includes(countryName.toLowerCase()) ||
-          country.capital.toLowerCase().includes(countryName.toLowerCase())
-        ) {
-          return country;
-        }
-      })
       .slice(0, 9)
       .map((info) =>
         info.currencies.map((currency) => (
@@ -48,10 +29,10 @@ const CountryCardContainer: React.FC = () => {
 
   return (
     <div>
-      <input type="text" onChange={handleChange} />
-      <button onClick={handleSubmit}>Search</button>
       <div>
-        {countryState.countries.length !== 0 ? (
+        {countryState.loading ? (
+          <h1>Loading</h1>
+        ) : countryState.countries.length !== 0 ? (
           generateCountriesBySearch()
         ) : (
           <p>{countryState.error}</p>

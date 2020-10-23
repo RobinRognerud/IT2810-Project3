@@ -11,23 +11,26 @@ import {
 import { CountryState } from "./CountryReducer";
 import { ThunkAction } from "redux-thunk";
 
-export const GetCountry: ActionCreator<ThunkAction<
+/* export const GetCountry: ActionCreator<ThunkAction<
   Promise<any>,
   CountryState,
   null,
   CountryActionTypes
->> = () => {
+>> = (search = "") => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch({
         type: FETCH_COUNTRY_REQUEST,
+        loading: true,
       });
 
-      const res = await axios.get(`http://localhost:4000/countries/`, {
-        params: {
-          _limit: 10,
-        },
-      });
+      const searchTerm = search ? `?name=${search}` : "";
+      console.log(search);
+      console.log(typeof search);
+      console.log(searchTerm);
+      const res = await axios.get(
+        `http://localhost:4000/countries/${searchTerm}`
+      );
 
       dispatch({
         type: FETCH_COUNTRY_SUCCESS,
@@ -40,4 +43,30 @@ export const GetCountry: ActionCreator<ThunkAction<
       });
     }
   };
-};
+}; */
+
+export function GetCountry(search = "") {
+  return async (dispatch: Dispatch) => {
+    try {
+      dispatch({
+        type: FETCH_COUNTRY_REQUEST,
+        loading: true,
+      });
+
+      const searchTerm = search ? `?name=${search}` : "";
+      const res = await axios.get(
+        `http://localhost:4000/countries/${searchTerm}`
+      );
+
+      dispatch({
+        type: FETCH_COUNTRY_SUCCESS,
+        countries: res.data,
+      });
+    } catch (e) {
+      console.log(e);
+      dispatch({
+        type: FETCH_COUNTRY_FAILURE,
+      });
+    }
+  };
+}

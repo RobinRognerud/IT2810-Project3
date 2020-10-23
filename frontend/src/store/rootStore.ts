@@ -3,12 +3,13 @@ import thunk, { ThunkMiddleware } from "redux-thunk";
 import { createLogger } from "redux-logger";
 
 import { countryReducer } from "./country/CountryReducer";
+import { searchReducer } from "./search/SearchReducer";
 import { AppActions } from "./models/actions";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 const logger = createLogger();
 
-export const rootReducer = combineReducers({ countryReducer });
+export const rootReducer = combineReducers({ countryReducer, searchReducer });
 
 export type AppState = ReturnType<typeof rootReducer>;
 
