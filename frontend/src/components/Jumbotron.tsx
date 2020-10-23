@@ -7,9 +7,9 @@ export const Jumbotron = () => {
    <div className="container">
     <h1 className="jumbotron-heading">Countries</h1>
     <p className="lead text-muted">
-Finn ditt favoritt land :D
+    Finn ditt favoritt land :D
     </p>
-    <p>
+    
     <select className="navbar-toggler" id="exampleSelect1">
       <option> Sorter etter: </option>
       <option> Myntenhet </option>
@@ -17,7 +17,7 @@ Finn ditt favoritt land :D
       <option>4</option>
       <option>5</option>
     </select>
-     <input className="navbar-toggler" type="search" value="Søk" id="example-search-input"></input>
+     <input className="navbar-toggler" type="search" value="Søk..." id="example-search-input"></input>
      <button
       className="navbar-toggler"
       type="button"
@@ -29,7 +29,7 @@ Finn ditt favoritt land :D
      >
       <span className="navbar-toggler-icon" />
      </button>
-    </p>
+    
    </div>
   </section>
  );

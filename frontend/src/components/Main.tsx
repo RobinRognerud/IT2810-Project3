@@ -13,16 +13,13 @@ const Main: React.FC<IMainProps> = () => {
              <Header/>
              <Jumbotron/>
     
-         <div className="album py-5 bg-light">
-          <div className="container">
-           <div className="row">
+        
                
-       <div className="col-4 card-body">
+             <div className="card flex-row flex-wrap">
           <CountryCardContainer/>
-        </div>
-           </div>
           </div>
-         </div>
+    
+       
          <Footer/>
         </main>
        );
