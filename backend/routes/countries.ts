@@ -7,7 +7,6 @@ router.get("/", async (req, res) => {
   try {
     const name = req.query.name ? req.query.name.toString().toLowerCase() : "";
     const filter: any = {};
-    console.log(name);
 
     for (const key of Object.keys(req.query)) {
       filter.name = {
@@ -16,7 +15,6 @@ router.get("/", async (req, res) => {
       };
     }
 
-    console.log(filter);
     const countries = await Country.find(filter);
     res.json(countries);
   } catch (err) {
