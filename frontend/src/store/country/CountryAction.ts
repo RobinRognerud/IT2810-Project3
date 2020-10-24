@@ -45,7 +45,7 @@ import { ThunkAction } from "redux-thunk";
   };
 }; */
 
-export function GetCountry(search = "") {
+export function GetCountry(search = "", countryName = "") {
   return async (dispatch: Dispatch) => {
     try {
       dispatch({
@@ -53,10 +53,15 @@ export function GetCountry(search = "") {
         loading: true,
       });
 
-      const searchTerm = search ? `?name=${search}` : "";
-      const res = await axios.get(
-        `http://localhost:4000/countries/${searchTerm}`
-      );
+      const searchOrDetail = (search: string, countryName: string) => {
+        if (countryName != "") {
+          return `?name=${countryName}`;
+        } else {
+          return search ? `?name=${search}` : "";
+        }
+      };
+      const filter = searchOrDetail(search, countryName);
+      const res = await axios.get(`http://localhost:4000/countries/${filter}`);
 
       dispatch({
         type: FETCH_COUNTRY_SUCCESS,

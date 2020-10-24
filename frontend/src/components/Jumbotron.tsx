@@ -5,14 +5,6 @@ import { updateSearch } from "../store/search/SearchActions";
 
 export const Jumbotron = () => {
   const dispatch = useDispatch();
-  /* const [countryName, setCountryName] = useState("");
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setCountryName(event.target.value);
-
-  useEffect(() => {
-    dispatch(GetCountry(countryName));
-  }, [countryName]); */
 
   const delayedQuery = _.debounce(
     (searchTerm: string) => dispatch(updateSearch(searchTerm)),

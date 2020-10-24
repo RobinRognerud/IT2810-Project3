@@ -31,7 +31,9 @@ const CountryCardContainer: React.FC = () => {
     <div>
       <div>
         {countryState.loading ? (
-          <h1>Loading</h1>
+          <div className="spinner-border" role="status">
+            <span className="sr-only">Loading...</span>
+          </div>
         ) : countryState.countries.length !== 0 ? (
           generateCountriesBySearch()
         ) : (
