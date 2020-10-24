@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import _ from "lodash";
-import { updateSearch } from "../store/search/SearchActions";
+import { updateSearch } from "../store/ducks/searchDuck";
 
 export const Jumbotron = () => {
   const dispatch = useDispatch();

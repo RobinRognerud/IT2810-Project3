@@ -4,7 +4,7 @@ import Main from "./components/Main";
 import CountryDetail from "./components/CountryDetail";
 import { useDispatch, useSelector } from "react-redux";
 import { RootStore } from "./store/rootStore";
-import { GetCountry } from "./store/country/CountryAction";
+import { GetCountry } from "./store/ducks/countryDuck";
 import Header from "./components/Header";
 
 interface IAppProps {}

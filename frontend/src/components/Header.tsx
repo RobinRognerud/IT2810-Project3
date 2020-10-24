@@ -1,7 +1,6 @@
-import _ from "lodash";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { updateSearch } from "../store/search/SearchActions";
+import { updateSearch } from "../store/ducks/searchDuck";
 import { hideDetailedView } from "../store/ducks/detailedCountry";
 
 interface Iheader {}

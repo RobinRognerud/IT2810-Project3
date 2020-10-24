@@ -1,3 +1,3 @@
-import { CountryActionTypes } from "../country/models/actions";
+import { CountryActionTypes } from "../ducks/countryDuck";
 
 export type AppActions = CountryActionTypes;
