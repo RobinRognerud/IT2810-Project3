@@ -6,7 +6,20 @@ import Country from "../modules/country";
 router.get("/", async (req, res) => {
   try {
     const skipAmount = req.query.skip ? Number(req.query.skip) : 0;
-    const countries = await Country.find().skip(skipAmount);
+    const name = req.query.name ? req.query.name.toString().toLowerCase() : "";
+    const filter: any = {};
+
+    for (const key of Object.keys(req.query)) {
+      filter.name = {
+        $regex: name,
+        $options: "i",
+      };
+    }
+    console.log(name);
+    console.log(filter);
+    console.log(skipAmount);
+
+    const countries = await Country.find(filter).skip(skipAmount).limit(9);
     res.json(countries);
   } catch (err) {
     res.json({ message: err });

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+export {};
+/* import React, { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -73,4 +74,4 @@ const MainPage: React.FC = () => {
   );
 };
 
-export default MainPage;
+export default MainPage; */
