@@ -1,14 +1,12 @@
 import React from "react";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import { RootStore } from "../store/rootStore";
 import CountryCard from "./CountryCard";
 
 const CountryCardContainer: React.FC = () => {
-  const dispatch = useDispatch();
   const countryState = useSelector((state: RootStore) => state.countryReducer);
-
   console.log("country state", countryState);
 
   function generateCountriesBySearch() {

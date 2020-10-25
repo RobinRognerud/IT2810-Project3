@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { updateSearch } from "../store/ducks/searchDuck";
 import { hideDetailedView } from "../store/ducks/detailedCountry";
+import { updateSkipAmount } from "../store/ducks/paginationDuck";
 
 interface Iheader {}
 
@@ -11,6 +12,7 @@ const Header: React.FC<Iheader> = () => {
   function refresh() {
     dispatch(updateSearch(""));
     dispatch(hideDetailedView());
+    dispatch(updateSkipAmount("", 0));
   }
 
   return (

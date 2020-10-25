@@ -4,6 +4,7 @@ import { createLogger } from "redux-logger";
 
 import { countryReducer } from "./ducks/countryDuck";
 import { searchReducer } from "./ducks/searchDuck";
+import { paginationReducer } from "./ducks/paginationDuck";
 import { detailedViewReducer } from "./ducks/detailedCountry";
 import { AppActions } from "./models/actions";
 import { composeWithDevTools } from "redux-devtools-extension";
@@ -14,6 +15,7 @@ export const rootReducer = combineReducers({
   countryReducer,
   searchReducer,
   detailedViewReducer,
+  paginationReducer,
 });
 
 export type AppState = ReturnType<typeof rootReducer>;
