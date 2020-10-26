@@ -50,6 +50,9 @@ export const updateSkipAmount = (
       return skipAmount;
     } else if (skipDirection === "next") {
       return (skipAmount = skipAmount + 9);
+    } else if (skipDirection === "back") {
+      console.log("Back skip", skipAmount);
+      return skipAmount;
     } else {
       return (skipAmount = 0);
     }

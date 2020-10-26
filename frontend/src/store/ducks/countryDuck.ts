@@ -22,6 +22,7 @@ export interface Country {
   languages: Languages[];
   population: number;
   area: number;
+  likes: number;
 }
 
 // Actions
@@ -46,6 +47,7 @@ export type CountryActionTypes =
   | fetchCountrySucess
   | fetchCountryFailure;
 
+//STATE
 export interface CountryState {
   loading: boolean;
   readonly countries: Country[];

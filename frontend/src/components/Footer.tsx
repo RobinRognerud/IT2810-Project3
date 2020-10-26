@@ -5,6 +5,7 @@ import { RootStore } from "../store/rootStore";
 
 export const Footer = () => {
   const dispatch = useDispatch();
+  const skip = useSelector((state: RootStore) => state.paginationReducer);
   const countryState = useSelector((state: RootStore) => state.countryReducer);
   return (
     <footer className="text-muted py-5">
@@ -36,9 +37,14 @@ export const Footer = () => {
             </li>
           </ul>
         </nav>
+
         {countryState.countries.length < 9 ? (
           <div>
             <p>You are on the last page</p>
+          </div>
+        ) : skip.skipAmount === 0 ? (
+          <div>
+            <p>You are on the first page</p>
           </div>
         ) : (
           <div></div>

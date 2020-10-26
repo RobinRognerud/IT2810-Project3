@@ -9,6 +9,7 @@ const CountryCardContainer: React.FC = () => {
   const countryState = useSelector((state: RootStore) => state.countryReducer);
   console.log("country state", countryState);
 
+  //map all country values into card as props
   function generateCountriesBySearch() {
     const items = countryState.countries
       .slice(0, 9)

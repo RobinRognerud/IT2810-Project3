@@ -1,3 +1,4 @@
+import { Dispatch } from "redux";
 import { updateSkipAmount } from "./paginationDuck";
 
 // Actions
@@ -36,7 +37,7 @@ export const searchReducer = (
 // Actions creator
 export const updateSearch = (searchTerm: string) => {
   /* const dispatch = useDispatch(); */
-  return (dispatch: React.Dispatch<any>) => {
+  return (dispatch: Dispatch) => {
     dispatch({
       type: UPDATE_SEARCH,
       searchTerm: searchTerm,
