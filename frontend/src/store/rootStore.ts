@@ -8,6 +8,7 @@ import { paginationReducer } from "./ducks/paginationDuck";
 import { detailedViewReducer } from "./ducks/detailedCountry";
 import { AppActions } from "./models/actions";
 import { composeWithDevTools } from "redux-devtools-extension";
+import { updateLikeReducer } from "./ducks/likeDuck";
 
 const logger = createLogger();
 
@@ -16,6 +17,7 @@ export const rootReducer = combineReducers({
   searchReducer,
   detailedViewReducer,
   paginationReducer,
+  updateLikeReducer,
 });
 
 export type AppState = ReturnType<typeof rootReducer>;

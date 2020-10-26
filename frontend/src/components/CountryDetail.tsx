@@ -2,14 +2,22 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootStore } from "../store/rootStore";
 import { hideDetailedView } from "../store/ducks/detailedCountry";
+import { updateLike } from "../store/ducks/likeDuck";
+import { updateSkipAmount } from "../store/ducks/paginationDuck";
 
 const CountryDetail: React.FC = () => {
   const dispatch = useDispatch();
   const countryState = useSelector((state: RootStore) => state.countryReducer);
 
+  const countryName = countryState.countries.map((info) => info.name);
   console.log("country state", countryState);
 
-  function mapLang(info: any) {
+  function back() {
+    dispatch(hideDetailedView());
+    dispatch(updateSkipAmount("back", 1));
+  }
+
+  function mapLanguage(info: any) {
     const items = info.languages.map((lang: any) => (
       <div>
         <li>
@@ -59,13 +67,16 @@ const CountryDetail: React.FC = () => {
                   <li>
                     <strong>Region: </strong> {info.region}
                   </li>
-                  {mapLang(info)}
+                  {mapLanguage(info)}
 
                   <li>
                     <strong>Population: </strong> {info.population}
                   </li>
                   <li>
                     <strong>Area: </strong> {info.area}
+                  </li>
+                  <li>
+                    <strong>Likes: </strong> {info.likes > 0 ? info.likes : 0}
                   </li>
                 </p>
               </div>
@@ -75,7 +86,8 @@ const CountryDetail: React.FC = () => {
       ) : (
         <p>{countryState.error}</p>
       )}
-      <button onClick={() => dispatch(hideDetailedView())}>Back</button>
+      <button onClick={() => back()}>Back</button>
+      <button onClick={() => dispatch(updateLike(countryName[0]))}>Like</button>
     </div>
   );
 };
