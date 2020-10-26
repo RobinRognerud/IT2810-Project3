@@ -90,7 +90,7 @@ export const countryReducer = (
 };
 
 //Action creator
-export function GetCountry(search = "", countryName = "", skipAmount = 0) {
+export function GetCountry(search = "", countryName = "", skipAmount = 0, sort = "", asc = true) {
   return async (dispatch: Dispatch) => {
     try {
       dispatch({
@@ -105,10 +105,15 @@ export function GetCountry(search = "", countryName = "", skipAmount = 0) {
           return search ? `&name=${search}` : "";
         }
       };
+
+      const sortString = sort ? `&sort=${sort}` : '';
+      const orderString = asc ? 'asc' : 'DESC';
+
+
       const skip = skipAmount ? `${skipAmount}` : 0;
       const filter = searchOrDetail(search, countryName);
       const res = await axios.get(
-        `http://localhost:4000/countries/?skip=${skip + filter}`
+        `http://localhost:4000/countries/?skip=${skip + filter + sortString}`
       );
 
       dispatch({

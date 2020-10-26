@@ -22,25 +22,59 @@ router.put("/:countryName", async (req, res) => {
 //LIMIT so it only gives back 9 countries
 router.get("/", async (req, res) => {
   try {
+    const sort: any = {};
     const skipAmount = req.query.skip ? Number(req.query.skip) : 0;
     const name = req.query.name ? req.query.name.toString().toLowerCase() : "";
     const filter: any = {};
 
     for (const key of Object.keys(req.query)) {
+      if (key === 'sort') {
+        const value = req.query[key];
+        console.log(value);
+        if (value != undefined) {
+          console.log(value.toString());
+          const isDESC = value.toString().endsWith('DESC')
+          if (value.toString().startsWith('name')) {
+            sort.name = isDESC ? -1 : 1;
+          }
+          else if (value.toString().startsWith('population')) {
+            sort.population = isDESC ? 1 : -1;
+          }
+          else if (value.toString().startsWith('capital')) {
+            sort.capital = isDESC ? -1 : 1;
+          }
+      }
+    }
       filter.name = {
         $regex: name,
         $options: "i",
       };
+  
     }
+
+
+
+/*     for (const key of Object.keys(req.query)) {
+      filter.name = {
+        $regex: name,
+        $options: "i",
+      };
+    } */
     console.log(name);
     console.log(filter);
     console.log(skipAmount);
+    console.log(sort);
 
-    const countries = await Country.find(filter).skip(skipAmount).limit(9);
+    const countries = await Country.find(filter).sort(sort).skip(skipAmount).limit(9);
     res.json(countries);
+
+  
+
   } catch (err) {
     res.json({ message: err });
   }
 });
+
+
 
 export default router;

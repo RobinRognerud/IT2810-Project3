@@ -6,6 +6,7 @@ import { countryReducer } from "./ducks/countryDuck";
 import { searchReducer } from "./ducks/searchDuck";
 import { paginationReducer } from "./ducks/paginationDuck";
 import { detailedViewReducer } from "./ducks/detailedCountry";
+import {sortReducer} from "./ducks/sortDuck"
 import { AppActions } from "./models/actions";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { updateLikeReducer } from "./ducks/likeDuck";
@@ -18,6 +19,7 @@ export const rootReducer = combineReducers({
   detailedViewReducer,
   paginationReducer,
   updateLikeReducer,
+  sortReducer
 });
 
 export type AppState = ReturnType<typeof rootReducer>;

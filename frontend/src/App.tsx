@@ -7,11 +7,13 @@ import { RootStore } from "./store/rootStore";
 import { GetCountry } from "./store/ducks/countryDuck";
 import Header from "./components/Header";
 
+
 function App() {
   const dispatch = useDispatch();
   const search = useSelector((state: RootStore) => state.searchReducer);
   const skip = useSelector((state: RootStore) => state.paginationReducer);
   const like = useSelector((state: RootStore) => state.updateLikeReducer);
+  const sort = useSelector((state: RootStore) => state.sortReducer);
   const detailedView = useSelector(
     (state: RootStore) => state.detailedViewReducer
   );
@@ -26,9 +28,9 @@ function App() {
 
   useEffect(() => {
     dispatch(
-      GetCountry(search.searchTerm, detailedView.countryName, detialOrMain())
+      GetCountry(search.searchTerm, detailedView.countryName, detialOrMain(),sort.sort, sort.asc)
     );
-  }, [skip, search, detailedView, like]);
+  }, [skip, search, detailedView, like, sort]);
 
   return (
     <div className="App">
