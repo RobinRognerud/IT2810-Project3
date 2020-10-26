@@ -40,7 +40,7 @@ export const countryReducer = (
       return {
         loading: false,
         countries: [],
-        error: "Something went wrong",
+        error: "Country loading error, check if backend is connected properly",
       };
     default:
       return state;
