@@ -1,3 +1,5 @@
+export {}
+/*
 import React, { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -16,9 +18,9 @@ const MainPage: React.FC = () => {
 
   console.log("country state", countryState);
 
- /*useEffect(() => {
+ useEffect(() => {
     dispatch(GetCountry());
-  }, [countryName]);*/
+  }, [countryName]);
 
   function generateCountriesBySearch() {
     const items = countryState.countries
@@ -61,3 +63,4 @@ const MainPage: React.FC = () => {
 };
 
 export default MainPage;
+*/

@@ -30,7 +30,7 @@ action: SortActionType
     switch (action.type) {
       case UPDATE_SORT:
         return {
-          sort: 'name',
+          sort: action.sort,
           asc: true
         };
       default:
@@ -40,6 +40,7 @@ action: SortActionType
 
 // ACTION CREATOR
 export const updateSort = (sort: string, asc: boolean) => {
+    console.log("Click")
     return {
         type: UPDATE_SORT,
         sort: sort,
