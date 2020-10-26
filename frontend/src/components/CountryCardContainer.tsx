@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import { RootStore } from "../store/rootStore";
 import CountryCard from "./CountryCard";
 
 const CountryCardContainer: React.FC = () => {
-  const dispatch = useDispatch();
   const countryState = useSelector((state: RootStore) => state.countryReducer);
-
   console.log("country state", countryState);
 
+  //map all country values into card as props
   function generateCountriesBySearch() {
     const items = countryState.countries
       .slice(0, 9)
@@ -28,7 +27,9 @@ const CountryCardContainer: React.FC = () => {
   return (
     <div>
       {countryState.loading ? (
-        <h1>Loading</h1>
+        <div className="spinner-border" role="status">
+          <span className="sr-only">Loading...</span>
+        </div>
       ) : countryState.countries.length !== 0 ? (
         <div className="card bg-ligth md-5">
           <div className="conteiner">

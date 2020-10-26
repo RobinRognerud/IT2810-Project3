@@ -31,6 +31,9 @@ const CountrieSchema = new mongoose.Schema({
   area: {
     type: Number,
   },
+  likes: {
+    type: Number,
+  },
 });
 
 export default mongoose.model("countries", CountrieSchema);

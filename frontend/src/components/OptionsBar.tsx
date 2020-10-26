@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import _ from "lodash";
-import { updateSearch } from "../store/search/SearchActions";
+import { updateSearch } from "../store/ducks/searchDuck";
+import { updateSort } from "../store/ducks/sortDuck";
 
-export const Jumbotron = () => {
+export const OptionsBar = () => {
   const dispatch = useDispatch();
 
   const delayedQuery = _.debounce(
@@ -11,18 +12,28 @@ export const Jumbotron = () => {
     500
   );
 
+  function handleOptionSelect(optionValue: string) {
+    dispatch(updateSort(optionValue, true));
+  }
+
   return (
     <section className="jumbotron text-center bg-white">
       <div className="container">
         <h1 className="jumbotron-heading">Countries</h1>
         <p className="lead text-muted">Finn ditt favoritt land :D</p>
         <p>
-          <select className="navbar-toggler" id="exampleSelect1">
+          <select
+            className="navbar-toggler"
+            id="exampleSelect1"
+            onChange={(e) => handleOptionSelect(e.target.value)}
+          >
             <option> Sorter etter: </option>
-            <option> Myntenhet </option>
-            <option>Størrelse</option>
-            <option>4</option>
-            <option>5</option>
+            <option value="nameasc"> A to Z </option>
+            <option value="nameDESC">Z to A</option>
+            <option value="populationasc">High to low population</option>
+            <option value="populationDESC">Low to high population</option>
+            <option value="capitalasc">Capitals A to Z</option>
+            <option value="capitalDESC">Capitals Z to A</option>
           </select>
           <input
             className="navbar-toggler"

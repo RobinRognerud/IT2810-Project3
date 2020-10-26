@@ -1,7 +1,6 @@
 import React from "react";
 import { Footer } from "./Footer";
-import Header from "./Header";
-import { Jumbotron } from "./Jumbotron";
+import { OptionsBar } from "./OptionsBar";
 import CountryCardContainer from "./CountryCardContainer";
 
 interface IMainProps {}
@@ -9,8 +8,7 @@ interface IMainProps {}
 const Main: React.FC<IMainProps> = () => {
   return (
     <main role="main">
-      <Header />
-      <Jumbotron />
+      <OptionsBar />
 
       <CountryCardContainer />
 

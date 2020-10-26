@@ -1,5 +1,7 @@
+import _ from "lodash";
 import React from "react";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { showDetailedView } from "../store/ducks/detailedCountry";
 
 interface ICountry {
   name: string;
@@ -14,6 +16,13 @@ const CountryCard: React.FC<ICountry> = ({
   flagURL,
   region,
 }) => {
+  const dispatch = useDispatch();
+
+  const delayedQuery = _.debounce(
+    (countryName: string) => dispatch(showDetailedView(countryName)),
+    500
+  );
+
   return (
     <div className="col-md-4 mt-4">
       <img
@@ -38,14 +47,13 @@ const CountryCard: React.FC<ICountry> = ({
 
           <div className="card-body">
             <div className="text-right">
-              <Link to={"/CountryDetail"}>
-                <button
-                  type="button"
-                  className="btn btn-outline-secondary btn-sm"
-                >
-                  View
-                </button>
-              </Link>
+              <button
+                type="button"
+                className="btn btn-outline-secondary btn-sm"
+                onClick={() => delayedQuery(name)}
+              >
+                View
+              </button>
             </div>
           </div>
         </div>
