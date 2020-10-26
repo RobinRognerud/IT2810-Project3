@@ -12,13 +12,13 @@ const MainPage: React.FC = () => {
   const countryState = useSelector((state: RootStore) => state.countryReducer);
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
     setCountryName(event.target.value);
-  const handleSubmit = () => dispatch(GetCountry());
+  const handleSubmit = () => dispatch(GetCountry('population', 'DESC'));
 
   console.log("country state", countryState);
 
-  useEffect(() => {
+ /*useEffect(() => {
     dispatch(GetCountry());
-  }, [countryName]);
+  }, [countryName]);*/
 
   function generateCountriesBySearch() {
     const items = countryState.countries

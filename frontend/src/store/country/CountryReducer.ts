@@ -13,11 +13,13 @@ export interface CountryState {
   error: string;
 }
 
+
 const defaultState: CountryState = {
   loading: false,
   countries: [],
   error: "",
 };
+
 
 export const countryReducer = (
   state = defaultState,
@@ -46,3 +48,4 @@ export const countryReducer = (
       return state;
   }
 };
+

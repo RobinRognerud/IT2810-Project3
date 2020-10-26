@@ -4,6 +4,7 @@ export const FETCH_COUNTRY_REQUEST = "FETCH_COUNTRY_REQUEST";
 export const FETCH_COUNTRY_SUCCESS = "FETCH_COUNTRY_SUCCESS";
 export const FETCH_COUNTRY_FAILURE = "FETCH_COUNTRY_FAILURE";
 
+
 export interface fetchCountryRequest {
   type: typeof FETCH_COUNTRY_REQUEST;
 }
@@ -15,6 +16,8 @@ export interface fetchCountryFailure {
   type: typeof FETCH_COUNTRY_FAILURE;
   error: string;
 }
+
+
 
 export type CountryActionTypes =
   | fetchCountryRequest
