@@ -5,16 +5,16 @@ import { showDetailedView } from "../store/ducks/detailedCountry";
 
 interface ICountry {
   name: string;
-  currencyName: string;
   flagURL: string;
   capital: String;
+  region: String;
 }
 
 const CountryCard: React.FC<ICountry> = ({
   name,
-  currencyName,
   capital,
   flagURL,
+  region,
 }) => {
   const dispatch = useDispatch();
 
@@ -24,38 +24,35 @@ const CountryCard: React.FC<ICountry> = ({
   );
 
   return (
-    <div>
-      <div className="card mb-3 box-shadow">
-        <img className="card-img-top" src={flagURL} alt="Country's flag" />
-        <div className="card-body">
-          <p className="card-text">
-            <li>
-              {" "}
-              <strong>Name: </strong> {name}
-            </li>
+    <div className="col-md-4 mt-4">
+      <img
+        className="card-img"
+        src={flagURL}
+        width="350"
+        height="250"
+        alt="Country's flag"
+      />
+      <div className="row no-gutters border rounded overflow-hidden flex-md-row md-4 shadow-sm h-md-250 position-relative">
+        <div className="col p-4 d-flex flex-column position-static">
+          <h5 className="card-title text-center">{name}</h5>
 
-            <li>
+          <ul className="list-group list-group-flush text-center">
+            <li className="list-group-item">
               <strong>Capital: </strong> {capital}
             </li>
-            <li>
-              <strong>Currencies: </strong> {currencyName}
+            <li className="list-group-item">
+              <strong>Region: </strong> {region}
             </li>
-          </p>
-          <div className="d-flex justify-content-between align-items-center">
-            <div className="btn-group">
+          </ul>
+
+          <div className="card-body">
+            <div className="text-right">
               <button
                 type="button"
-                className="btn btn-sm btn-outline-secondary"
+                className="btn btn-outline-secondary btn-sm"
                 onClick={() => delayedQuery(name)}
               >
                 View
-              </button>
-
-              <button
-                type="button"
-                className="btn btn-sm btn-outline-secondary"
-              >
-                Like
               </button>
             </div>
           </div>

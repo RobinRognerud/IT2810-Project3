@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
 import Main from "./components/Main";
 
-import CountryDetail from "./components/CountryDetail";
+import CountryDetail from "./components/CountryCardDetail";
 import { useDispatch, useSelector } from "react-redux";
 import { RootStore } from "./store/rootStore";
 import { GetCountry } from "./store/ducks/countryDuck";
 import Header from "./components/Header";
-
 
 function App() {
   const dispatch = useDispatch();
@@ -28,7 +27,12 @@ function App() {
 
   useEffect(() => {
     dispatch(
-      GetCountry(search.searchTerm, detailedView.countryName, detialOrMain(),sort.sort, sort.asc)
+      GetCountry(
+        search.searchTerm,
+        detailedView.countryName,
+        detialOrMain(),
+        sort.sort
+      )
     );
   }, [skip, search, detailedView, like, sort]);
 

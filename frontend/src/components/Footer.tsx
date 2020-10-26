@@ -15,40 +15,54 @@ export const Footer = () => {
         </p>
         <nav aria-label="Page navigation example">
           <ul className="pagination">
-            <li
-              onClick={() =>
-                dispatch(
-                  updateSkipAmount("prev", countryState.countries.length)
-                )
-              }
-              className="page-item"
-            >
-              <button className="page-link"> Previous </button>
-            </li>
-            <li
-              onClick={() =>
-                dispatch(
-                  updateSkipAmount("next", countryState.countries.length)
-                )
-              }
-              className="page-item"
-            >
-              <button className="page-link">Next</button>
-            </li>
+            {skip.skipAmount === 0 ? (
+              <li className="page-item">
+                <button
+                  type="button"
+                  className="btn btn-secondary btn-lg"
+                  disabled
+                >
+                  Previous
+                </button>
+              </li>
+            ) : (
+              <li
+                onClick={() =>
+                  dispatch(
+                    updateSkipAmount("prev", countryState.countries.length)
+                  )
+                }
+                className="page-item"
+              >
+                <button className="btn btn-secondary btn-lg"> Previous </button>
+              </li>
+            )}
+            {countryState.countries.length < 9 ? (
+              <div>
+                <li className="page-item">
+                  <button
+                    type="button"
+                    className="btn btn-secondary btn-lg"
+                    disabled
+                  >
+                    Next
+                  </button>
+                </li>
+              </div>
+            ) : (
+              <li
+                onClick={() =>
+                  dispatch(
+                    updateSkipAmount("next", countryState.countries.length)
+                  )
+                }
+                className="page-item"
+              >
+                <button className="btn btn-secondary btn-lg ml-3">Next</button>
+              </li>
+            )}
           </ul>
         </nav>
-
-        {countryState.countries.length < 9 ? (
-          <div>
-            <p>You are on the last page</p>
-          </div>
-        ) : skip.skipAmount === 0 ? (
-          <div>
-            <p>You are on the first page</p>
-          </div>
-        ) : (
-          <div></div>
-        )}
       </div>
     </footer>
   );

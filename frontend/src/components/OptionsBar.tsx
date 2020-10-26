@@ -1,10 +1,10 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import _, { update } from "lodash";
+import _ from "lodash";
 import { updateSearch } from "../store/ducks/searchDuck";
 import { updateSort } from "../store/ducks/sortDuck";
 
-export const Jumbotron = () => {
+export const OptionsBar = () => {
   const dispatch = useDispatch();
 
   const delayedQuery = _.debounce(
@@ -17,12 +17,16 @@ export const Jumbotron = () => {
   }
 
   return (
-    <section className="jumbotron text-center mb-0 bg-white">
+    <section className="jumbotron text-center bg-white">
       <div className="container">
         <h1 className="jumbotron-heading">Countries</h1>
         <p className="lead text-muted">Finn ditt favoritt land :D</p>
         <p>
-          <select className="navbar-toggler" id="exampleSelect1" onChange={e => handleOptionSelect(e.target.value)}>
+          <select
+            className="navbar-toggler"
+            id="exampleSelect1"
+            onChange={(e) => handleOptionSelect(e.target.value)}
+          >
             <option> Sorter etter: </option>
             <option value="nameasc"> A to Z </option>
             <option value="nameDESC">Z to A</option>

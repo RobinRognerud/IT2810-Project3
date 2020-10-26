@@ -6,7 +6,7 @@ export const UPDATE_SORT = "UPDATE_SORT";
 export interface fetchSortedCountries {
     type: typeof UPDATE_SORT;
     sort: string;
-    asc: boolean;
+
 }
 
 export type SortActionType = fetchSortedCountries;
@@ -14,12 +14,12 @@ export type SortActionType = fetchSortedCountries;
 // State
 export interface SortState {
     sort: string;
-    asc: boolean;
+
 }
 
 const defaultSortState: SortState = {
     sort: "",
-    asc: true
+
 };
 
 // REDUCER
@@ -31,7 +31,7 @@ action: SortActionType
       case UPDATE_SORT:
         return {
           sort: action.sort,
-          asc: true
+
         };
       default:
         return state;
@@ -40,11 +40,11 @@ action: SortActionType
 
 // ACTION CREATOR
 export const updateSort = (sort: string, asc: boolean) => {
-    console.log("Click")
+   
     return {
         type: UPDATE_SORT,
         sort: sort,
-        asc: asc
+
     }
 }
 

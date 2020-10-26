@@ -90,7 +90,7 @@ export const countryReducer = (
 };
 
 //Action creator
-export function GetCountry(search = "", countryName = "", skipAmount = 0, sort = "", asc = true) {
+export function GetCountry(search = "", countryName = "", skipAmount = 0, sort = "") {
   return async (dispatch: Dispatch) => {
     try {
       dispatch({
@@ -107,7 +107,6 @@ export function GetCountry(search = "", countryName = "", skipAmount = 0, sort =
       };
 
       const sortString = sort ? `&sort=${sort}` : '';
-      const orderString = asc ? 'asc' : 'DESC';
 
 
       const skip = skipAmount ? `${skipAmount}` : 0;
