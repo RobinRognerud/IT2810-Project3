@@ -5,7 +5,6 @@ import Country from "../modules/country";
 // Increment likes on a country, based on the countryName from the updateLike() function
 router.put("/:countryName", async (req, res) => {
   try {
-    console.log(req.params.countryName.toLowerCase());
     const updatedCountry = await Country.updateOne(
       { name: req.params.countryName },
       { $inc: { likes: 1 } }
@@ -17,64 +16,54 @@ router.put("/:countryName", async (req, res) => {
 });
 
 //GET BACK ALL THE COUNTRIES
-//FIND by either search query or all
+//FIND by either search query, region or get back all if none is specified
+//SORT by the given parameter
 //SKIP with a intervall of 9
-//LIMIT so it only gives back 9 countries
+//LIMIT so only 9 countries are displayed at once
 router.get("/", async (req, res) => {
   try {
-    const sort: any = {};
     const skipAmount = req.query.skip ? Number(req.query.skip) : 0;
-    const name = req.query.name ? req.query.name.toString().toLowerCase() : "";
+    const name = req.query.name
+      ? "^" + req.query.name.toString().toLowerCase()
+      : "";
+    const filterString = req.query.filter
+      ? req.query.filter.toString().toLowerCase()
+      : "";
+
     const filter: any = {};
+    const sort: any = {};
 
     for (const key of Object.keys(req.query)) {
-      if (key === 'sort') {
+      if (key === "sort") {
         const value = req.query[key];
-        console.log(value);
         if (value != undefined) {
-          console.log(value.toString());
-          const isDESC = value.toString().endsWith('DESC')
-          if (value.toString().startsWith('name')) {
+          const isDESC = value.toString().endsWith("DESC");
+          if (value.toString().startsWith("name")) {
             sort.name = isDESC ? -1 : 1;
-          }
-          else if (value.toString().startsWith('population')) {
+          } else if (value.toString().startsWith("population")) {
             sort.population = isDESC ? 1 : -1;
-          }
-          else if (value.toString().startsWith('capital')) {
+          } else if (value.toString().startsWith("capital")) {
             sort.capital = isDESC ? -1 : 1;
           }
+        }
       }
+
+      filter.$and = [
+        { region: { $regex: filterString, $options: "i" } },
+        {
+          name: { $regex: name, $options: "i" },
+        },
+      ];
     }
-      filter.name = {
-        $regex: name,
-        $options: "i",
-      };
-  
-    }
 
-
-
-/*     for (const key of Object.keys(req.query)) {
-      filter.name = {
-        $regex: name,
-        $options: "i",
-      };
-    } */
-    console.log(name);
-    console.log(filter);
-    console.log(skipAmount);
-    console.log(sort);
-
-    const countries = await Country.find(filter).sort(sort).skip(skipAmount).limit(9);
+    const countries = await Country.find(filter)
+      .sort(sort)
+      .skip(skipAmount)
+      .limit(9);
     res.json(countries);
-
-  
-
   } catch (err) {
     res.json({ message: err });
   }
 });
-
-
 
 export default router;

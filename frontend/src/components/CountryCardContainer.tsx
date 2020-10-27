@@ -7,20 +7,17 @@ import CountryCard from "./CountryCard";
 
 const CountryCardContainer: React.FC = () => {
   const countryState = useSelector((state: RootStore) => state.countryReducer);
-  console.log("country state", countryState);
 
-  //map all country values into card as props
+  //Map all country values into CountryCard as props
   function generateCountriesBySearch() {
-    const items = countryState.countries
-      .slice(0, 9)
-      .map((info) => (
-        <CountryCard
-          name={info.name}
-          capital={info.capital}
-          flagURL={info.flag}
-          region={info.region}
-        />
-      ));
+    const items = countryState.countries.map((info) => (
+      <CountryCard
+        name={info.name}
+        capital={info.capital}
+        flagURL={info.flag}
+        region={info.region}
+      />
+    ));
     return items;
   }
 

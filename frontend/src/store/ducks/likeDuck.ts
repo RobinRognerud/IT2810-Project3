@@ -5,15 +5,14 @@ import { Dispatch } from "redux";
 
 export const UPDATE_LIKE = "UPDATE_LIKE";
 
-export interface updateLike {
+export interface updateLikeI {
   type: typeof UPDATE_LIKE;
   updated: boolean;
 }
 
-export type LikeActionTypes = updateLike;
+export type LikeActionTypes = updateLikeI;
 
-//STATE
-
+//State
 export interface LikeState {
   updated: boolean;
 }
@@ -23,7 +22,7 @@ const defaultState: LikeState = {
 };
 
 //Reducer
-export const updateLikeReducer = (
+export const likeReducer = (
   state = defaultState,
   action: LikeActionTypes
 ): LikeState => {
