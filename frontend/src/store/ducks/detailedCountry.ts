@@ -1,8 +1,3 @@
-//Type
-export interface CountryName {
-  countryName: string;
-}
-
 // Actions
 
 export const SHOW_DETAILED_VIEW = "SHOW_DETAILED_VIEW";
@@ -21,7 +16,7 @@ export interface hideDetailedView {
 
 export type DetailedActionTypes = showDetailedView | hideDetailedView;
 
-//STATE
+//State
 export interface DetailedState {
   countryName: string;
   show: boolean;

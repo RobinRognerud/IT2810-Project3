@@ -42,7 +42,7 @@ export const Footer = () => {
                 <li className="page-item">
                   <button
                     type="button"
-                    className="btn btn-secondary btn-lg"
+                    className="btn btn-secondary btn-lg ml-3"
                     disabled
                   >
                     Next

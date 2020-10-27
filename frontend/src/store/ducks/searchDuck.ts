@@ -4,13 +4,14 @@ import { updateSkipAmount } from "./paginationDuck";
 // Actions
 export const UPDATE_SEARCH = "UPDATE_SEARCH";
 
-export interface searchByTerm {
+export interface updateSearchI {
   type: typeof UPDATE_SEARCH;
   searchTerm: string;
 }
 
-export type SearchActionTypes = searchByTerm;
+export type SearchActionTypes = updateSearchI;
 
+//State
 export interface SearchState {
   searchTerm: string;
 }
@@ -36,7 +37,6 @@ export const searchReducer = (
 
 // Actions creator
 export const updateSearch = (searchTerm: string) => {
-  /* const dispatch = useDispatch(); */
   return (dispatch: Dispatch) => {
     dispatch({
       type: UPDATE_SEARCH,
