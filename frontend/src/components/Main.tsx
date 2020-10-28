@@ -7,7 +7,7 @@ interface IMainProps {}
 
 const Main: React.FC<IMainProps> = () => {
   return (
-    <main role="main">
+    <main role="main" className="container">
       <OptionsBar />
 
       <CountryCardContainer />

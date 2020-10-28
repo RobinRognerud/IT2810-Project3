@@ -23,10 +23,12 @@ const CountryCardDetail: React.FC = () => {
       <div>
         {info.languages.length > 1 ? (
           <div>
-            {" "}
-            <li>Nr. {index + 1}:</li>
-            <ul>Name: {lang.name} </ul>
-            <ul>Native name: {lang.nativeName} </ul>
+            <ul className="list-group list-group-flush text-center">
+              {" "}
+              Nr. {index + 1}:
+            </ul>
+            <li className="list-group-item">Name: {lang.name} </li>
+            <li className="list-group-item">Native name: {lang.nativeName} </li>
           </div>
         ) : (
           <div>
@@ -45,16 +47,16 @@ const CountryCardDetail: React.FC = () => {
         <div>
           {info.currencies.length > 1 ? (
             <div>
-              <ul>Nr. {index + 1}:</ul>
-              <ul> Name: {currency.name}</ul>
-              <ul>Symbol: {currency.symbol}</ul>
-              <ul>Code: {currency.code}</ul>
+              <li className="list-group-item">Nr. {index + 1}:</li>
+              <li className="list-group-item"> Name: {currency.name}</li>
+              <ul className="list-group-item">Symbol: {currency.symbol}</ul>
+              <ul className="list-group-item">Code: {currency.code}</ul>
             </div>
           ) : (
             <div>
-              <ul> Name: {currency.name}</ul>
-              <ul>Symbol: {currency.symbol}</ul>
-              <ul>Code: {currency.code}</ul>
+              <li className="list-group-item"> Name: {currency.name}</li>
+              <li className="list-group-item">Symbol: {currency.symbol}</li>
+              <li className="list-group-item">Code: {currency.code}</li>
             </div>
           )}
         </div>
@@ -64,51 +66,63 @@ const CountryCardDetail: React.FC = () => {
   }
 
   return (
-    <div className="conteiner">
-      <div>
-        <div className="col">
-          {countryState.loading ? (
-            <div className="spinner-border" role="status">
-              <span className="sr-only">Loading...</span>
-            </div>
-          ) : countryState.countries.length !== 0 ? (
-            countryState.countries.map((info) => (
-              <div className="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+    <div>
+      <div className="col">
+        {countryState.loading ? (
+          <div className="spinner-border" role="status">
+            <span className="sr-only">Loading...</span>
+          </div>
+        ) : countryState.countries.length !== 0 ? (
+          countryState.countries.map((info) => (
+            <div className="card">
+              <div className="card-header">
+                <div className="row">
+                  <div className="col-sm-4">
+                    <h1 className="card-title mb-2">{info.name}</h1>
+                  </div>
+
+                  <div className="col-sm-4 text-center mt-3">
+                    <strong className="ml-2">Likes: </strong>
+                    {info.likes > 0 ? info.likes : 0}
+                  </div>
+                  <div className="col-sm-4 text-center mt-3">
+                    <button
+                      className="btn btn-outline-secondary btn-sm"
+                      onClick={() => dispatch(updateLike(countryName[0]))}
+                    >
+                      Like
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div className="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative text-center">
                 <div className="col p-4 d-flex flex-column position-static">
                   <p className="card-text">
-                    <h5 className="card-title">{info.name}</h5>
-
                     <div className="row">
                       <div className="col-sm-4">
-                        <li>
+                        <li className="list-group-item">
                           <strong>Capital: </strong> {info.capital}
                         </li>
-                        <li>
-                          <strong>Currencies: </strong>{" "}
-                        </li>
-                        {mapCurrency(info)}
-                      </div>
-                      <div className="col-sm-4">
-                        <li>
-                          {" "}
-                          <strong> Languages: </strong>{" "}
-                        </li>
-                        {mapLang(info)}
-                      </div>
-                      <div className="col-sm-4">
-                        <li>
+                        <li className="list-group-item">
                           <strong>Region: </strong> {info.region}
                         </li>
-                        <li>
+                        <li className="list-group-item">
                           <strong>Population: </strong> {info.population}
                         </li>
-                        <li>
+                        <li className="list-group-item">
                           <strong>Area: </strong> {info.area}
                         </li>
-                        <li>
-                          <strong>Likes: </strong>{" "}
-                          {info.likes > 0 ? info.likes : 0}
-                        </li>
+                      </div>
+                      <div className="col-sm-4">
+                        <strong>Currencies: </strong>
+
+                        {mapCurrency(info)}
+                      </div>
+
+                      <div className="col-sm-4">
+                        <strong> Languages: </strong>
+
+                        {mapLang(info)}
                       </div>
                     </div>
                   </p>
@@ -124,15 +138,12 @@ const CountryCardDetail: React.FC = () => {
                   />
                 </div>
               </div>
-            ))
-          ) : (
-            <p>{countryState.error}</p>
-          )}
-        </div>
-        <button onClick={() => back()}>Back</button>
-        <button onClick={() => dispatch(updateLike(countryName[0]))}>
-          Like
-        </button>
+              <button onClick={() => back()}>Back</button>
+            </div>
+          ))
+        ) : (
+          <p>{countryState.error}</p>
+        )}
       </div>
     </div>
   );

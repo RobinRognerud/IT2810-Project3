@@ -16,14 +16,15 @@ const Header: React.FC<Iheader> = () => {
   }
 
   return (
-    <header>
-      <div className="navbar navbar-dark bg-dark box-shadow mb-4">
-        <div className="container d-flex justify-content-between">
-          <div className="lead text-muted">
-            <button onClick={() => refresh()}>
-              <strong>Countries</strong>
-            </button>
-          </div>
+    <header className="blog-header py-3 border-bottom mb-4">
+      <div className="row flex-nowrap justify-content-between align-items-center">
+        <div className="col text-p1">
+          <button
+            className=" btn btn-link btn-lg text-dark"
+            onClick={() => refresh()}
+          >
+            <strong> 🌎 Countries</strong>
+          </button>
         </div>
       </div>
     </header>
@@ -31,3 +32,6 @@ const Header: React.FC<Iheader> = () => {
 };
 
 export default Header;
+
+{
+}

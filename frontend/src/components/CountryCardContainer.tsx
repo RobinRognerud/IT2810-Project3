@@ -32,9 +32,7 @@ const CountryCardContainer: React.FC = () => {
         </div>
       ) : countryState.countries.length !== 0 ? (
         <div className="card bg-ligth md-5">
-          <div className="conteiner">
-            <div className="row md-2 mt-4">{generateCountriesBySearch()}</div>
-          </div>
+          <div className="row md-2 mt-4">{generateCountriesBySearch()}</div>
         </div>
       ) : (
         <p>{countryState.error}</p>

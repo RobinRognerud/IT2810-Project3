@@ -28,13 +28,13 @@ const CountryCard: React.FC<ICountry> = ({
       <img
         className="card-img"
         src={flagURL}
-        width="350"
+        width="250"
         height="250"
         alt="Country's flag"
       />
       <div className="row no-gutters border rounded overflow-hidden flex-md-row md-4 shadow-sm h-md-250 position-relative">
         <div className="col p-4 d-flex flex-column position-static">
-          <h5 className="card-title text-center">{name}</h5>
+          <h5 className=" card-title text-center">{name}</h5>
 
           <ul className="list-group list-group-flush text-center">
             <li className="list-group-item">

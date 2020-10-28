@@ -37,7 +37,7 @@ function App() {
   }, [skip, search, detailedView, like, sort]);
 
   return (
-    <div className="App">
+    <div className="App container">
       <Header />
       {detailedView.show ? <CountryDetail /> : <Main />}
     </div>
