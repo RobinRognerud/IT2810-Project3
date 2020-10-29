@@ -24,15 +24,17 @@ const CountryCard: React.FC<ICountry> = ({
   );
 
   return (
-    <div className="col-md-4 mt-4">
-      <img
-        className="card-img"
-        src={flagURL}
-        width="250"
-        height="250"
-        alt="Country's flag"
-      />
-      <div className="row no-gutters border rounded overflow-hidden flex-md-row md-4 shadow-sm h-md-250 position-relative">
+    <div className="col-lg-4 mt-4 col-md-6">
+      <div className="border border-muted">
+        <img
+          className="card-img "
+          src={flagURL}
+          width="250"
+          height="250"
+          alt="Country's flag"
+        />
+      </div>
+      <div className="row no-gutters border flex-md-row md-4 shadow-sm h-md-250 position-relative">
         <div className="col p-4 d-flex flex-column position-static">
           <h5 className=" card-title text-center">{name}</h5>
 
@@ -46,13 +48,13 @@ const CountryCard: React.FC<ICountry> = ({
           </ul>
 
           <div className="card-body">
-            <div className="text-right">
+            <div className="text-center">
               <button
                 type="button"
                 className="btn btn-outline-secondary btn-sm"
                 onClick={() => delayedQuery(name)}
               >
-                View
+                More details
               </button>
             </div>
           </div>

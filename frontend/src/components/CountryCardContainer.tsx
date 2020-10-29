@@ -25,14 +25,14 @@ const CountryCardContainer: React.FC = () => {
   }
 
   return (
-    <div>
+    <div className="main">
       {countryState.loading ? (
         <div className="spinner-border" role="status">
           <span className="sr-only">Loading...</span>
         </div>
       ) : countryState.countries.length !== 0 ? (
-        <div className="card bg-ligth md-5">
-          <div className="row md-2 mt-4">{generateCountriesBySearch()}</div>
+        <div className="card bg-ligth ">
+          <div className="row">{generateCountriesBySearch()}</div>
         </div>
       ) : (
         <p>{countryState.error}</p>
