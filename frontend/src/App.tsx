@@ -38,6 +38,7 @@ function App() {
         filter.filter
       )
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [skip, search, detailedView, like, sort, filter]);
 
   return (
