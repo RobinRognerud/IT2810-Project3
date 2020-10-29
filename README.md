@@ -11,12 +11,14 @@ GET: http://localhost:4000/countries
 
 Det tar i mot disse query parameterene:
 | Query parametere | Tillatte verdier | Beskrivelse |  Eksempel |
-| ---------------- | ---------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| ---------------- | ---------------- | ----------- | ------------ |
 | skip | Tar imot heltall med et intervall på 9 | Bestemmer hviken side som skal vises | `/countries/?skip=9` hopper over de 9 første landa |
 | search\* | en streng | Spesifiserer ønska land etter navn, enten partiell eller | `/countries/?name=nor` returner land som starter på nor |
 | sort | nameasc, nameDESC, population, populationDESC, capitalasc, capitalDESC | sorterer landets navn og hovedsted A til Å, Å til A og innbyggertall max-min og min-max | `/countries/?sort=nameDESC` vil returnere landa i alfabestik synkende rekkefølge etter navn på landet |
 | filter | Africa, Americas, Asia, Europe, Oceania | filtrerer dataen baset på region | `/countries/?filter=Europe` vil returnerer alle landene som er i europa |
+
 \*search parameteret brukes også til å hente ut et spesifikt land når _view_ knappen klikkes og detaljert informasjon vises om et land.
+
 Endepunktet har også en begrensning _limit_ som er satt til å være 9 i backend for å begrense antall returnerte verdier til 9 ettersom dette passet layouten.
 Det andre endeputet er en put for å oppdatere antall likes
 
@@ -38,7 +40,7 @@ Vi tok i bruk redux for å behandle state, slik at vi fikk en global state som k
 Redux består av en store, constants, actions, action creators og reducers. Det er mest utrbredt å plassere dette i egne filer hver for seg, men vi synes dette virket lite skalerbart. Derfor søkte vi etter andre måte og strukturere redux koden og kom over redux ducks, som vil si at man samler alle filene i en modul som omhandler det samme. Redux thunk ble benyttet som middleware for å gjøre kall til databasen.
 Hver duck er ansvarlig for å styre logikken til en state. Vi har benyttet oss av disse:
 | Duck | Beskrivelse | Action Creator |
-| ------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| --- | ----------- | --------------- |
 | countryDuck |  Styrer logikken for henting av land basert på søk, sortering og andre parametere |  **getCountry** er funksjonen som brukes for å hente land fra backend. Kallet til backend blir spesifisert med ulike parametere. Et velykket resultat kaller FETCH*COUNTRY_SUCCESS som sender dataen videre til countryReducer som oppdaterer den globale staten. Om det skulle oppstå en error i GetCountry vil FETCH_COUNTRY_FAILURE bli kalt og det blir returnert en feilmelding. |
 | detailedCountryDuck | styrer om \_CountryCardDetail* eller _Main_ skal vises | **showDetailedView** tar imot navnet til et land og setter show til true, slik at _CountryCardDetail_ komponentet vises med det spesifiserte landet. **hideDetailedView** endrer show variablen til false, slik at _Main_ vises igjen |
 | filterDuck | spesifiserer hvilken region det skal filtreres etter |  **updateFilter** tar imot hvilken region som blir valgt i dropdown menyen og sender videre til filterReducer |
