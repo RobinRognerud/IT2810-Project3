@@ -1,3 +1,6 @@
+import { Dispatch } from "redux";
+import { updateSkipAmount } from "./paginationDuck";
+
 // ACTIONS
 export const UPDATE_SORT = "UPDATE_SORT";
 
@@ -34,8 +37,10 @@ export const sortReducer = (
 
 // ACTION CREATOR
 export const updateSort = (sort: string) => {
-  return {
-    type: UPDATE_SORT,
-    sort: sort,
+  return (dispatch: Dispatch) => {
+    dispatch({ 
+      type: UPDATE_SORT,
+      sort: sort});
+    dispatch(updateSkipAmount("", 0));
   };
 };
