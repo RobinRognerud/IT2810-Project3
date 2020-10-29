@@ -1,18 +1,19 @@
 // Actions
 export const UPDATE_SKIPAMOUNT = "UPDATE_SKIPAMOUNT";
 
-export interface pagination {
+export interface updateSkipAmountI {
   type: typeof UPDATE_SKIPAMOUNT;
   skipAmount: number;
 }
 
-export type PaginationActionTypes = pagination;
+export type PaginationActionTypes = updateSkipAmountI;
 
-export interface paginationState {
+//State
+export interface skipAmountState {
   skipAmount: number;
 }
 
-const defaultState: paginationState = {
+const defaultState: skipAmountState = {
   skipAmount: 0,
 };
 
@@ -20,7 +21,7 @@ const defaultState: paginationState = {
 export const paginationReducer = (
   state = defaultState,
   action: PaginationActionTypes
-): paginationState => {
+): skipAmountState => {
   switch (action.type) {
     case UPDATE_SKIPAMOUNT:
       return {
@@ -31,17 +32,14 @@ export const paginationReducer = (
   }
 };
 
+//Contains the skipAmount so we can make changes to it before returned
 let skipAmount = 0;
 // Actions creator
 export const updateSkipAmount = (
   skipDirection: string,
   countryStateLength: number
 ) => {
-  /* let skipAmount = defaultState.skipAmount; */
   function checkSkipAmount(skipDirection: string) {
-    console.log(skipAmount);
-    console.log(countryStateLength);
-    console.log(skipDirection);
     if (skipDirection === "prev" && skipAmount === 0) {
       return (skipAmount = 0);
     } else if (skipDirection === "prev") {
@@ -50,9 +48,6 @@ export const updateSkipAmount = (
       return skipAmount;
     } else if (skipDirection === "next") {
       return (skipAmount = skipAmount + 9);
-    } else if (skipDirection === "back") {
-      console.log("Back skip", skipAmount);
-      return skipAmount;
     } else {
       return (skipAmount = 0);
     }

@@ -1,22 +1,25 @@
 import React, { useEffect } from "react";
 import Main from "./components/Main";
 
-import CountryDetail from "./components/CountryCardDetail";
 import { useDispatch, useSelector } from "react-redux";
 import { RootStore } from "./store/rootStore";
-import { GetCountry } from "./store/ducks/countryDuck";
+import { getCountry } from "./store/ducks/countryDuck";
 import Header from "./components/Header";
+import CountryCardDetailed from "./components/CountryCardDetail";
 
 function App() {
   const dispatch = useDispatch();
   const search = useSelector((state: RootStore) => state.searchReducer);
   const skip = useSelector((state: RootStore) => state.paginationReducer);
-  const like = useSelector((state: RootStore) => state.updateLikeReducer);
+  const like = useSelector((state: RootStore) => state.likeReducer);
   const sort = useSelector((state: RootStore) => state.sortReducer);
+  const filter = useSelector((state: RootStore) => state.filterReducer);
   const detailedView = useSelector(
     (state: RootStore) => state.detailedViewReducer
   );
 
+  //If detaildView.shown is true, CountryCardDetailed should be shown,
+  //then only one country is returned and the skipAmount has to be 0
   function detialOrMain() {
     if (detailedView.show) {
       return 0;
@@ -27,19 +30,20 @@ function App() {
 
   useEffect(() => {
     dispatch(
-      GetCountry(
+      getCountry(
         search.searchTerm,
         detailedView.countryName,
         detialOrMain(),
-        sort.sort
+        sort.sort,
+        filter.filter
       )
     );
-  }, [skip, search, detailedView, like, sort]);
+  }, [skip, search, detailedView, like, sort, filter]);
 
   return (
     <div className="App container">
       <Header />
-      {detailedView.show ? <CountryDetail /> : <Main />}
+      {detailedView.show ? <CountryCardDetailed /> : <Main />}
     </div>
   );
 }

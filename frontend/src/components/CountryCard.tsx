@@ -1,13 +1,14 @@
 import _ from "lodash";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { showDetailedView } from "../store/ducks/detailedCountry";
+import { showDetailedView } from "../store/ducks/countryDetailDuck";
 
 interface ICountry {
   name: string;
   flagURL: string;
-  capital: String;
-  region: String;
+  capital: string;
+  region: string;
+  population: number;
 }
 
 const CountryCard: React.FC<ICountry> = ({
@@ -15,13 +16,22 @@ const CountryCard: React.FC<ICountry> = ({
   capital,
   flagURL,
   region,
+  population,
 }) => {
   const dispatch = useDispatch();
 
-  const delayedQuery = _.debounce(
-    (countryName: string) => dispatch(showDetailedView(countryName)),
-    500
-  );
+  function formatPopulationNr(population: number) {
+    // Nine Zeroes for Billions
+    return Math.abs(Number(population)) >= 1.0e9
+      ? (Math.abs(Number(population)) / 1.0e9).toFixed(2) + " B"
+      : // Six Zeroes for Millions
+      Math.abs(Number(population)) >= 1.0e6
+      ? (Math.abs(Number(population)) / 1.0e6).toFixed(2) + " M"
+      : // Three Zeroes for Thousands
+      Math.abs(Number(population)) >= 1.0e3
+      ? (Math.abs(Number(population)) / 1.0e3).toFixed(2) + " K"
+      : Math.abs(Number(population));
+  }
 
   return (
     <div className="col-lg-4 mt-4 col-md-6">
@@ -45,6 +55,11 @@ const CountryCard: React.FC<ICountry> = ({
             <li className="list-group-item">
               <strong>Region: </strong> {region}
             </li>
+            <li className="list-group-item">
+              {" "}
+              <strong> Population: </strong>
+              {formatPopulationNr(population)}
+            </li>
           </ul>
 
           <div className="card-body">
@@ -52,7 +67,7 @@ const CountryCard: React.FC<ICountry> = ({
               <button
                 type="button"
                 className="btn btn-outline-secondary btn-sm"
-                onClick={() => delayedQuery(name)}
+                onClick={() => dispatch(showDetailedView(name))}
               >
                 More details
               </button>

@@ -5,11 +5,12 @@ import { createLogger } from "redux-logger";
 import { countryReducer } from "./ducks/countryDuck";
 import { searchReducer } from "./ducks/searchDuck";
 import { paginationReducer } from "./ducks/paginationDuck";
-import { detailedViewReducer } from "./ducks/detailedCountry";
-import {sortReducer} from "./ducks/sortDuck"
+import { detailedViewReducer } from "./ducks/countryDetailDuck";
+import { sortReducer } from "./ducks/sortDuck";
+import { filterReducer } from "./ducks/filterDuck";
 import { AppActions } from "./models/actions";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { updateLikeReducer } from "./ducks/likeDuck";
+import { likeReducer } from "./ducks/likeDuck";
 
 const logger = createLogger();
 
@@ -18,8 +19,9 @@ export const rootReducer = combineReducers({
   searchReducer,
   detailedViewReducer,
   paginationReducer,
-  updateLikeReducer,
-  sortReducer
+  likeReducer,
+  sortReducer,
+  filterReducer,
 });
 
 export type AppState = ReturnType<typeof rootReducer>;

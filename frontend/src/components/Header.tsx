@@ -1,18 +1,20 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { updateSearch } from "../store/ducks/searchDuck";
-import { hideDetailedView } from "../store/ducks/detailedCountry";
-import { updateSkipAmount } from "../store/ducks/paginationDuck";
+import { hideDetailedView } from "../store/ducks/countryDetailDuck";
+import { updateFilter } from "../store/ducks/filterDuck";
+import { updateSort } from "../store/ducks/sortDuck";
 
-interface Iheader {}
-
-const Header: React.FC<Iheader> = () => {
+const Header: React.FC = () => {
   const dispatch = useDispatch();
 
+  //If "Countries" button is clicked we need to set all values to default
+  //to show all countries without parameters such as (sort, search, filter)
   function refresh() {
     dispatch(updateSearch(""));
     dispatch(hideDetailedView());
-    dispatch(updateSkipAmount("", 0));
+    dispatch(updateFilter(""));
+    dispatch(updateSort(""));
   }
 
   return (

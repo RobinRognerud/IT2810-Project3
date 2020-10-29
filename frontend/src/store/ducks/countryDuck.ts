@@ -47,7 +47,7 @@ export type CountryActionTypes =
   | fetchCountrySucess
   | fetchCountryFailure;
 
-//STATE
+//State
 export interface CountryState {
   loading: boolean;
   readonly countries: Country[];
@@ -89,8 +89,22 @@ export const countryReducer = (
   }
 };
 
+/**
+ *
+ * @param searchTerm is a string that specify what the returned countrys name should contain
+ * @param countryName is the name of the specific country that should be shown in detaildCountryCard
+ * @param skipAmount is the number of results that should be skipped
+ * @param sortParam specifies how the countries should be sorted
+ * @param filter specifies by which region the countries should be filtered
+ */
 //Action creator
-export function GetCountry(search = "", countryName = "", skipAmount = 0, sort = "") {
+export function getCountry(
+  searchTerm = "",
+  countryName = "",
+  skipAmount = 0,
+  sortParam = "",
+  filter = ""
+) {
   return async (dispatch: Dispatch) => {
     try {
       dispatch({
@@ -98,6 +112,9 @@ export function GetCountry(search = "", countryName = "", skipAmount = 0, sort =
         loading: true,
       });
 
+      //If countryName has a value it means that the detialedCountryCard will be shown and
+      //we return the name of the specific country
+      //if not we return the search parameter if it is set, else empty string
       const searchOrDetail = (search: string, countryName: string) => {
         if (countryName !== "") {
           return `&name=${countryName}`;
@@ -106,13 +123,14 @@ export function GetCountry(search = "", countryName = "", skipAmount = 0, sort =
         }
       };
 
-      const sortString = sort ? `&sort=${sort}` : '';
-
-
+      const sort = sortParam ? `&sort=${sortParam}` : "";
+      const filterByRegion = filter ? `&filter=${filter}` : " ";
       const skip = skipAmount ? `${skipAmount}` : 0;
-      const filter = searchOrDetail(search, countryName);
+      const filterByName = searchOrDetail(searchTerm, countryName);
       const res = await axios.get(
-        `http://localhost:4000/countries/?skip=${skip + filter + sortString}`
+        `http://localhost:4000/countries/?skip=${
+          skip + filterByName + sort + filterByRegion
+        }`
       );
 
       dispatch({

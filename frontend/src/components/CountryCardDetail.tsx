@@ -1,9 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootStore } from "../store/rootStore";
-import { hideDetailedView } from "../store/ducks/detailedCountry";
+import { hideDetailedView } from "../store/ducks/countryDetailDuck";
 import { updateLike } from "../store/ducks/likeDuck";
-import { updateSkipAmount } from "../store/ducks/paginationDuck";
 
 const CountryCardDetail: React.FC = () => {
   const dispatch = useDispatch();
@@ -11,12 +10,18 @@ const CountryCardDetail: React.FC = () => {
 
   console.log("country state", countryState);
 
-  function back() {
-    dispatch(hideDetailedView());
-    dispatch(updateSkipAmount("back", 1));
+  function formatPopulatnNr(population: number) {
+    // Nine Zeroes for Billions
+    return Math.abs(Number(population)) >= 1.0e9
+      ? (Math.abs(Number(population)) / 1.0e9).toFixed(2) + " B"
+      : // Six Zeroes for Millions
+      Math.abs(Number(population)) >= 1.0e6
+      ? (Math.abs(Number(population)) / 1.0e6).toFixed(2) + " M"
+      : // Three Zeroes for Thousands
+      Math.abs(Number(population)) >= 1.0e3
+      ? (Math.abs(Number(population)) / 1.0e3).toFixed(2) + " K"
+      : Math.abs(Number(population));
   }
-
-  const countryName = countryState.countries.map((info) => info.name);
 
   function mapLang(info: any) {
     const items = info.languages.map((lang: any, index: number) => (
@@ -96,31 +101,33 @@ const CountryCardDetail: React.FC = () => {
         </div>
       ) : countryState.countries.length !== 0 ? (
         countryState.countries.map((info) => (
-          <div className="card mb-4">
+          <div className="col-lg-12 mt-4  justify-content-center">
             <div className="card-header">
               <div className="row">
-                <div className="col-auto">
-                  <h1 className="card-title mb-2">
+                <div className="col-lg-6 mt-4 col-md-6 col-sm-7 col-xs-4">
+                  <h1 className="card-title mb-2" style={{ fontSize: "3vw" }}>
                     {info.name}
                     <img
                       className="bd-placeholder-img ml-3"
-                      width="50"
-                      height="40"
+                      width="50vw"
+                      height="40vw"
                       src={info.flag}
                       alt="Country's flag"
                     />
                   </h1>
                 </div>
 
-                <div className="col text-right">
-                  <strong className="ml-2">Likes: </strong>
-                  {info.likes > 0 ? info.likes : 0}
-                  <div className="btn">
+                <div className=" col-md-6 col-sm-5 col-xs-2 text-right">
+                  <div className="btn-sm">
                     <button
-                      className="btn btn-outline-secondary btn-sm"
-                      onClick={() => dispatch(updateLike(countryName[0]))}
+                      type="button"
+                      className="close mt-2 mr-4"
+                      aria-label="Close"
+                      onClick={() => dispatch(hideDetailedView())}
                     >
-                      Like
+                      <span style={{ fontSize: "4vw" }} aria-hidden="true">
+                        &times;
+                      </span>
                     </button>
                   </div>
                 </div>
@@ -136,10 +143,12 @@ const CountryCardDetail: React.FC = () => {
                   <strong>Region: </strong> {info.region}
                 </li>
                 <li className="list-group-item">
-                  <strong>Population: </strong> {info.population}
+                  <strong>Population: </strong>{" "}
+                  {formatPopulatnNr(info.population)}
                 </li>
                 <li className="list-group-item">
-                  <strong>Area: </strong> {info.area}
+                  <strong>Area: </strong> {info.area.toLocaleString("en-US")} km
+                  <sup>2</sup>
                 </li>
               </div>
               <div className="col p-4 d-flex flex-column position-static">
@@ -157,13 +166,20 @@ const CountryCardDetail: React.FC = () => {
 
             <div className="card-footer text-muted">
               <div className="text-center">
-                {" "}
-                <button
-                  className="btn btn-outline-secondary btn-sm"
-                  onClick={() => back()}
-                >
-                  Back
-                </button>{" "}
+                <div className="col">
+                  <div className="row justify-content-center mb-2">
+                    <strong className="ml-2">Likes: </strong>
+                    {info.likes > 0 ? info.likes : 0}
+                  </div>
+                  <div className="row justify-content-center">
+                    <button
+                      className="btn btn-outline-secondary btn-sm"
+                      onClick={() => dispatch(updateLike(info.name))}
+                    >
+                      Like
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

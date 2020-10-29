@@ -1,19 +1,47 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
 import { updateSearch } from "../store/ducks/searchDuck";
 import { updateSort } from "../store/ducks/sortDuck";
+import { updateFilter } from "../store/ducks/filterDuck";
+import { RootStore } from "../store/rootStore";
 
 export const OptionsBar = () => {
   const dispatch = useDispatch();
 
+  //This is used to prevent the searchTerm to get updated at every character written,
+  //first when theres half a second break the searchTerm gets updated
   const delayedQuery = _.debounce(
     (searchTerm: string) => dispatch(updateSearch(searchTerm)),
     500
   );
 
-  function handleOptionSelect(optionValue: string) {
-    dispatch(updateSort(optionValue, true));
+  const searchTerm = useSelector((state: RootStore) => state.searchReducer);
+  const filterValue = useSelector((state: RootStore) => state.filterReducer);
+  const sortValue = useSelector((state: RootStore) => state.sortReducer);
+
+  function setSortValue(sortValue: string) {
+    if (sortValue) {
+      return sortValue;
+    } else {
+      return "";
+    }
+  }
+
+  function setFilterValue(filterValue: string) {
+    if (filterValue) {
+      return filterValue;
+    } else {
+      return "";
+    }
+  }
+
+  function placeholderSearch(searchTerm: string) {
+    if (searchTerm) {
+      return searchTerm;
+    } else {
+      return "Search for a country 🔍";
+    }
   }
 
   return (
@@ -27,28 +55,43 @@ export const OptionsBar = () => {
       </p>
 
       <div className="row">
-        <div className=" col text-center">
+        <div className="d-flex col-lg-4 col-xs-8 mt-1 text-center">
           <select
             className="form-control form-control-lg"
             id="exampleSelect1"
-            onChange={(e) => handleOptionSelect(e.target.value)}
+            value={setSortValue(sortValue.sort)}
+            onChange={(e) => dispatch(updateSort(e.target.value))}
           >
             <option value="nameasc"> A to Z </option>
             <option value="nameDESC">Z to A</option>
-            <option value="populationasc">High to low population</option>
-            <option value="populationDESC">Low to high population</option>
+            <option value="populationasc">Population ↑</option>
+            <option value="populationDESC">Population ↓</option>
             <option value="capitalasc">Capitals A to Z</option>
             <option value="capitalDESC">Capitals Z to A</option>
           </select>
         </div>
-
-        <div className="col text-center">
+        <div className="d-flex .flex-lg-nowrap .flex-xs-wrap col-lg-4 col-xs-8 mt-1 text-center">
+          <select
+            className="form-control form-control-lg"
+            id="exampleSelect1"
+            value={setFilterValue(filterValue.filter)}
+            onChange={(e) => dispatch(updateFilter(e.target.value))}
+          >
+            <option value=""> All regions </option>
+            <option value="Africa">Africa </option>
+            <option value="Americas">America</option>
+            <option value="Asia">Asia</option>
+            <option value="Europe">Europe</option>
+            <option value="Oceania">Oceania</option>
+          </select>
+        </div>
+        <div className="d-flex .flex-lg-nowrap .flex-xs-wrap col-lg-4 col-xs-8 mt-1 text-center">
           <input
-            className="form-control form-control-lg text-center"
+            className="form-control form-control-lg"
             type="text-center"
-            placeholder="Søk etter land 🔍"
             id="example-search-input"
             aria-label="Search"
+            placeholder={placeholderSearch(searchTerm.searchTerm)}
             onChange={(e) => delayedQuery(e.target.value)}
           />
         </div>
@@ -56,44 +99,3 @@ export const OptionsBar = () => {
     </div>
   );
 };
-
-/* <header class="blog-header py-3">
-  <div class="row flex-nowrap justify-content-between align-items-center">
-    <div class="col-4 pt-1">
-      <a class="text-muted" href="#">
-        Subscribe
-      </a>
-    </div>
-    <div class="col-4 text-center">
-      <a class="blog-header-logo text-dark" href="#">
-        Large
-      </a>
-    </div>
-    <div class="col-4 d-flex justify-content-end align-items-center">
-      <a class="text-muted" href="#" aria-label="Search">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
-          fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          class="mx-3"
-          role="img"
-          viewBox="0 0 24 24"
-          focusable="false"
-        >
-          <title>Search</title>
-          <circle cx="10.5" cy="10.5" r="7.5"></circle>
-          <path d="M21 21l-5.2-5.2"></path>
-        </svg>
-      </a>
-      <a class="btn btn-sm btn-outline-secondary" href="#">
-        Sign up
-      </a>
-    </div>
-  </div>
-</header>;
- */

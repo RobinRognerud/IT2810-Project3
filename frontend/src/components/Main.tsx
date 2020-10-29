@@ -3,9 +3,7 @@ import { Footer } from "./Footer";
 import { OptionsBar } from "./OptionsBar";
 import CountryCardContainer from "./CountryCardContainer";
 
-interface IMainProps {}
-
-const Main: React.FC<IMainProps> = () => {
+const Main: React.FC = () => {
   return (
     <main role="main" className="container">
       <OptionsBar />

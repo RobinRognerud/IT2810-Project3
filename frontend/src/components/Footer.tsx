@@ -9,11 +9,6 @@ export const Footer = () => {
   const countryState = useSelector((state: RootStore) => state.countryReducer);
   return (
     <footer className="text-muted py-3 mt-4 border-top ">
-      <p className="float-right">
-        <a className="btn btn-link btn-lg text-dark" href="#">
-          Back to top
-        </a>
-      </p>
       <nav aria-label="Page navigation example">
         <ul className="pagination">
           {skip.skipAmount === 0 ? (

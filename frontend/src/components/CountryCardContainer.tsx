@@ -7,20 +7,18 @@ import CountryCard from "./CountryCard";
 
 const CountryCardContainer: React.FC = () => {
   const countryState = useSelector((state: RootStore) => state.countryReducer);
-  console.log("country state", countryState);
 
-  //map all country values into card as props
-  function generateCountriesBySearch() {
-    const items = countryState.countries
-      .slice(0, 9)
-      .map((info) => (
-        <CountryCard
-          name={info.name}
-          capital={info.capital}
-          flagURL={info.flag}
-          region={info.region}
-        />
-      ));
+  //Map all country values into CountryCard as props
+  function generateCountries() {
+    const items = countryState.countries.map((info) => (
+      <CountryCard
+        name={info.name}
+        capital={info.capital}
+        flagURL={info.flag}
+        region={info.region}
+        population={info.population}
+      />
+    ));
     return items;
   }
 
@@ -32,10 +30,12 @@ const CountryCardContainer: React.FC = () => {
         </div>
       ) : countryState.countries.length !== 0 ? (
         <div className="card bg-ligth ">
-          <div className="row">{generateCountriesBySearch()}</div>
+          <div className="row">{generateCountries()}</div>
         </div>
-      ) : (
+      ) : countryState.error ? (
         <p>{countryState.error}</p>
+      ) : (
+        <p>Sorry! No countries match your criteria, try something else</p>
       )}
     </div>
   );
