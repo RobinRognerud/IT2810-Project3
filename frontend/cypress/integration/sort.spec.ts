@@ -1,6 +1,6 @@
 import {} from 'cypress';
-import { contains } from 'cypress/types/jquery';
-import { valuesIn } from 'cypress/types/lodash';
+
+
 describe('Sorting', () => {
     beforeEach(() => {
         cy.visit('http://localhost:3000')
@@ -13,13 +13,13 @@ describe('Sorting', () => {
 
 
     it('Correctly sorts countries', () => {
-        cy.get('#exampleSelect1').select('Z to A');
+        cy.get('#sortBar').select('Z to A');
         cy.get('h5').first().contains('Virgin Islands U.S')
     })
 
-    it('Also sorts while searching', () => {
-        cy.get('#exampleSelect1').select('Z to A');
-        cy
-        cy.get('h5').first().contains('Norway')
+    it('Also sorts while filtering, and searching', () => {
+        cy.get('#filterBar').select('Europe');
+        cy.get('#sortBar').select('Capitals A to Z');
+        cy.get('h5').first().contains('Netherlands')
     })
 })

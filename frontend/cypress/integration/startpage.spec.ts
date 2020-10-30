@@ -4,16 +4,15 @@ describe('Startpage', () => {
         cy.visit('http://localhost:3000');
     })
     it('Has correct buttons', () => {
+        cy.get('button.btn.btn-outline-secondary.btn-lg').should('be.disabled');
         cy.get('li.page-item').should('be.visible').should('have.length', 2);
-        cy.get('div.btn-group').should('be.visible').contains('View');
-        cy.get('a').contains('Back to top');
+        cy.get('button.btn.btn-outline-secondary.btn-sm').should('be.visible').contains('More details');
         
     })
-    /*it('Pagination is working correctly', () => {
-        cy.server();
-        cy.route('/countries/skip=9').as('page2');
-        cy.route('/countries/skip=19').as('page3');
-        cy.get('button.page-link').contains('Next').click();
-        cy.wait('@page2');
-    })*/
+    it('Pagination is working correctly', () => {
+        cy.get('.page-item').contains('Next').click();
+        cy.get('h5').first().contains('Armenia');
+        cy.get('.page-item').contains('Next').click();
+        cy.get('h5').first().contains('Belarus');
+    })
 })
