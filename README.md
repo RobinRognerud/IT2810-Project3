@@ -1,6 +1,14 @@
 # Project 3
 
-## BACKEND
+Countries er en nettside hvor man kan søke, filtrere og sortere på et utvalg av verdens land. Vi har valgt å bruke de opplysningene vi synes er mest relevant for denne oppgaven. På siden er det mulig å se ytterligere informasjon om hvert land ved å trykke på “more information”.
+
+## Desgin
+
+Vi har valgt å bruke bootstrap til å designe hjemmesiden. Det er ikke laget egne css filer men heller stylet alt ved hjelp av rammeverket til bootstrap. For å style koden er det blitt brukt en blanding av ferdig kode av bootstrap, og egen kode. Et eksempel på kode vi gjenbrukt fra bootstrap, [bootstrap cards](https://getbootstrap.com/docs/4.0/components/card/).
+
+For blaing har vi brukt knapper for neste og forrige side med 9 land per side. Knappene er gjort ”disabled” når det ikke er noe neste eller forrige.
+
+## Backend
 
 Vi installerte MonogDB på NTNU sin virtueller server, der la vi inn data om land generet fra [REST Countries](http://restcountries.eu/#filter-response). Vi brukte denne URL´en [https://restcountries.eu/rest/v2/all?fields=name;capital;region;flag;languages;currencies;population;area](https://restcountries.eu/rest/v2/all?fields=name;capital;region;flag;alpha3code;region;languages;currencies;population;area) og la inn 166 land i databasen. MongoDb passet oss bra ettersom den lagerer data i et JSON-lignende format. Dataen blir lagret i arrays som gjør at databasestrukturen blir intuituv og enklere å jobbe med. I databasen har vi en collection som heter countries. Denne har følgende felt: name, capital, region, flag, languages, currencies, population, area, likes (felt vi har lagt til selv, som holder styr på hvor mange ganger landet har blitt likt)
 Vi implementerte et REST API med Node.js og Express sammen med mongoose (for Mongodb objekt modellering). Vi implementerte to endepunkt ettersom vi fulgte https://restfulapi.net/resource-naming/ sin anbefaling om å bruke query parametere for sortering, filtrering og blaing og dermed ikke trengte flere spesifikke endepunkt. Ut fra dette endepunktet henter vi all informasjon fra databasen:
@@ -13,7 +21,7 @@ GET: http://localhost:4000/countries
 | ---------------- | ---------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
 | skip             | Tar imot heltall med et intervall på 9                                 | Bestemmer hviken side som skal vises                                                    | `/countries/?skip=9` hopper over de 9 første landa                                                    |
 | search           | en streng                                                              | Spesifiserer ønska land etter navn, enten partiell eller fullt navn                     | `/countries/?name=nor` returner land som starter på nor                                               |
-| sort             | nameasc, nameDESC, population, populationDESC, capitalasc, capitalDESC | sorterer landets navn og hovedsted A til Å, Å til A og innbyggertall max-min og min-max | `/countries/?sort=nameDESC` vil returnere landa i alfabestik synkende rekkefølge etter navn på landet |
+| sort             | nameasc, nameDESC, population, populationDESC, capitalasc, capitalDESC | sorterer landets navn og hovedsted A til Z, Z til A og innbyggertall max-min og min-max | `/countries/?sort=nameDESC` vil returnere landa i alfabestik synkende rekkefølge etter navn på landet |
 | filter           | Africa, Americas, Asia, Europe, Oceania                                | filtrerer dataen baset på region                                                        | `/countries/?filter=Europe` vil returnerer alle landene som er i europa                               |
 
 search parameteret brukes også til å hente ut et spesifikt land når _more details_ knappen klikkes og detaljert informasjon vises om et land.
@@ -68,12 +76,21 @@ CountryCardDetail - Viser all informasjon om et land
 
 Footer - Inneholder knappene som tillater blaing
 
+## Testing
+
+Gruppen fant ingen ulikheter og siden fungerte optimalt på de nettleserne som ble testet. Testet på chroome, safari og edge
+
+## Git og sammarbeid
+
+Vi fikk tilbakemelding på forrige prosjekt at vi hadde for mange branches og issues. Så denne gangen har vi prøvd å ha issues og branches som rommer større oppgaver. Gruppens erfaring med dette er at det blir en del mer konflikter når man merger.
+
+Vi har brukt brancen dev som master gjennom hele prosjektet, dette er for å ha en fungerende master til en hver tid.
+De fleste merge-konflikter er løst sammen for å få best mulig resultat, og mulighet for å diskutere koden.
+
+Gruppa har møttes jevnlig, og brukt messenger for digital kommunikasjon. Det er alltid vært enighet før noen har merget noe. Vi ser i ettertid at vi kunne vært flinkere til å bruke git sitt rammeverk for kommunikasjon.
+
+Hvert møte har vi avtalt nye issues som man skal jobbe til neste gang. Om noen i gruppe ikke har lykkes med oppgaven har vi benyttet oss av parkoding.
+
 ## Videre utvikling
 
 Vi ønsker å vidreutvikle funksjonaliteten til blant annet likes, slik at en bruker kun kan like landet en gang
-
-| header 1 | header 2         | header 3                                                                                                                            |
-| -------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| cell 1   | cell 2           | cell 3                                                                                                                              |
-| cell 4   | cell 5 is longer | cell 6 is much longer than the others, but that's ok. It eventually wraps the text when the cell is too large for the display size. |
-| cell 7   |                  | cell 9                                                                                                                              |
