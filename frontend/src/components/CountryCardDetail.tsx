@@ -76,14 +76,14 @@ const CountryCardDetail: React.FC = () => {
             <div>
               <li className="list-group-item">
                 {" "}
-                <strong>Name:</strong> {currency.name}
+                <strong>Name: </strong> {currency.name}
               </li>
               <li className="list-group-item">
                 {" "}
-                <strong>Symbol:</strong> {currency.symbol}
+                <strong>Symbol: </strong> {currency.symbol}
               </li>
               <li className="list-group-item">
-                <strong>Code:</strong> {currency.code}
+                <strong>Code: </strong> {currency.code}
               </li>
             </div>
           )}
@@ -102,82 +102,81 @@ const CountryCardDetail: React.FC = () => {
       ) : countryState.countries.length !== 0 ? (
         countryState.countries.map((info) => (
           <div className="col-lg-12 mt-4  justify-content-center">
-            <div className="card-header">
-              <div className="row">
-                <div className="col-lg-6 mt-4 col-md-6 col-sm-7 col-xs-4">
-                  <h1 className="card-title mb-2" style={{ fontSize: "3vw" }}>
-                    {info.name}
-                    <img
-                      className="bd-placeholder-img ml-3"
-                      width="50vw"
-                      height="40vw"
-                      src={info.flag}
-                      alt="Country's flag"
-                    />
-                  </h1>
+            <div className="card">
+              <div className="card-header">
+                <h2 className="card-title mb-2">
+                  {info.name}
+                  <img
+                    className="bd-placeholder-img ml-3"
+                    width="50vw"
+                    height="40vw"
+                    src={info.flag}
+                    alt="Country's flag"
+                  />
+
+                  <button
+                    type="button"
+                    className="close mt-2 mr-4 justify-content-rigth"
+                    aria-label="Close"
+                    onClick={() => dispatch(hideDetailedView())}
+                  >
+                    <span style={{ fontSize: "4vw" }} aria-hidden="true">
+                      &times;
+                    </span>
+                  </button>
+                </h2>
+              </div>
+
+              <div className="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative text-center">
+                <div className="col p-4 d-flex flex-column position-static">
+                  <h5>Information</h5>
+                  <li className="list-group-item">
+                    <strong>Capital: </strong> {info.capital}
+                  </li>
+                  <li className="list-group-item">
+                    <strong>continents: </strong> {info.region}
+                  </li>
+                  <li className="list-group-item">
+                    <strong>Population: </strong>{" "}
+                    {formatPopulatnNr(info.population)}
+                  </li>
+                  <li className="list-group-item">
+                    <strong>Area: </strong> {info.area.toLocaleString("en-US")}{" "}
+                    km
+                    <sup>2</sup>
+                  </li>
+                </div>
+                <div className="col p-4 d-flex flex-column position-static">
+                  <h5>Currencies</h5>
+
+                  {mapCurrency(info)}
                 </div>
 
-                <div className=" col-md-6 col-sm-5 col-xs-2 text-right">
-                  <div className="btn-sm">
-                    <button
-                      type="button"
-                      className="close mt-2 mr-4"
-                      aria-label="Close"
-                      onClick={() => dispatch(hideDetailedView())}
-                    >
-                      <span style={{ fontSize: "4vw" }} aria-hidden="true">
-                        &times;
-                      </span>
-                    </button>
-                  </div>
+                <div className="col p-4 d-flex flex-column position-static">
+                  <h5> Languages</h5>
+
+                  {mapLang(info)}
                 </div>
               </div>
-            </div>
-            <div className="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative text-center">
-              <div className="col p-4 d-flex flex-column position-static">
-                <h5>Information</h5>
-                <li className="list-group-item">
-                  <strong>Capital: </strong> {info.capital}
-                </li>
-                <li className="list-group-item">
-                  <strong>Region: </strong> {info.region}
-                </li>
-                <li className="list-group-item">
-                  <strong>Population: </strong>{" "}
-                  {formatPopulatnNr(info.population)}
-                </li>
-                <li className="list-group-item">
-                  <strong>Area: </strong> {info.area.toLocaleString("en-US")} km
-                  <sup>2</sup>
-                </li>
-              </div>
-              <div className="col p-4 d-flex flex-column position-static">
-                <h5>Currencies</h5>
 
-                {mapCurrency(info)}
-              </div>
-
-              <div className="col p-4 d-flex flex-column position-static">
-                <h5> Languages</h5>
-
-                {mapLang(info)}
-              </div>
-            </div>
-
-            <div className="card-footer text-muted">
-              <div className="text-center">
-                <div className="col">
-                  <div className="row justify-content-center mb-2">
-                    <strong className="ml-2">Likes: </strong>
-                    {info.likes > 0 ? info.likes : 0}
-                  </div>
-                  <div className="row justify-content-center">
-                    <button
-                      className="btn btn-outline-secondary btn-sm"
-                      onClick={() => dispatch(updateLike(info.name))}
-                    >
-                      Like
-                    </button>
+              <div className="card-footer text-muted">
+                <div className="text-center">
+                  <div className="col">
+                    <div className="row justify-content-center">
+                      <p className="mb-1">
+                        {" "}
+                        <strong>Likes: </strong>
+                        {info.likes > 0 ? info.likes : 0}
+                      </p>
+                    </div>
+                    <div className="row justify-content-center">
+                      <button
+                        className="btn btn-outline-secondary btn-sm"
+                        onClick={() => dispatch(updateLike(info.name))}
+                      >
+                        Like
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
