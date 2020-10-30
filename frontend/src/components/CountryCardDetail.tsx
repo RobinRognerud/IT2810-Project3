@@ -10,6 +10,7 @@ const CountryCardDetail: React.FC = () => {
 
   console.log("country state", countryState);
 
+  //Format the population number
   function formatPopulatnNr(population: number) {
     // Nine Zeroes for Billions
     return Math.abs(Number(population)) >= 1.0e9
@@ -23,6 +24,7 @@ const CountryCardDetail: React.FC = () => {
       : Math.abs(Number(population));
   }
 
+  //Iterate through the languages array
   function mapLang(info: any) {
     const items = info.languages.map((lang: any, index: number) => (
       <div>
@@ -50,7 +52,7 @@ const CountryCardDetail: React.FC = () => {
     ));
     return items;
   }
-
+  //Iterate through currencies array
   function mapCurrency(info: any) {
     const itemsCurrency = info.currencies.map(
       (currency: any, index: number) => (
@@ -164,7 +166,6 @@ const CountryCardDetail: React.FC = () => {
                   <div className="col">
                     <div className="row justify-content-center">
                       <p className="mb-1">
-                        {" "}
                         <strong>Likes: </strong>
                         {info.likes > 0 ? info.likes : 0}
                       </p>

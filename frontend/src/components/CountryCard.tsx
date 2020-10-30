@@ -20,6 +20,7 @@ const CountryCard: React.FC<ICountry> = ({
 }) => {
   const dispatch = useDispatch();
 
+  //Format the population number
   function formatPopulationNr(population: number) {
     // Nine Zeroes for Billions
     return Math.abs(Number(population)) >= 1.0e9
