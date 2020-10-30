@@ -88,7 +88,9 @@ Footer - Inneholder knappene som tillater blaing
 
 Vi har benyttet oss av rammeverket cypress for å forenkle automatisert end-2-end testing. Grunnen til valget av cypress er at det er enkelt å installere, effektivt og testene gir gode tilbakemeldinger i UI-et. Det er også enkelt å debugge feil, og det er god dokumentasjon som er enkelt å finne. Det er skrevet tester som sjekker de mest brukte og viktigste interaktivitets-muligheten på siden. Vi sjekker ikke alle tilfeller da dette ville tatt for lang tid. Noe av det vi har testet er at input-feltet tar imot og bruker verdier, at filtrering og sortering gir korrekte verdier tilbake og at det fungerer å bla i sider.
 
-For å kjøre test skriv `npx cypress open`
+Vi har prøvd å implementere unit tester via både jest og cypress, men lyktes ikke med det og valgte derfor å velge det bort ettersom dette tok mer tid enn nødvenidg og vi føler at end2end testene dekker mye av det samme.
+
+For å kjøre end2end testene skriv `npx cypress open` og velg hvilke test du vil kjøre.
 
 Gruppen fant ingen ulikheter og siden fungerte optimalt på de nettleserne som ble testet. Testet på chroome, safari og edge
 
