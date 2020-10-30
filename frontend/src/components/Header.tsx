@@ -25,7 +25,12 @@ const Header: React.FC = () => {
             className=" btn btn-link btn-lg text-dark"
             onClick={() => refresh()}
           >
-            <strong> 🌎 Countries</strong>
+            <strong>
+              <span role="img" aria-label="Globe" aria-labelledby="col text-p1">
+                🌎
+              </span>
+              Countries
+            </strong>
           </button>
         </div>
       </div>
@@ -34,6 +39,3 @@ const Header: React.FC = () => {
 };
 
 export default Header;
-
-{
-}

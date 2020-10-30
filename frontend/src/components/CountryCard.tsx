@@ -1,4 +1,3 @@
-import _ from "lodash";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { showDetailedView } from "../store/ducks/countryDetailDuck";
