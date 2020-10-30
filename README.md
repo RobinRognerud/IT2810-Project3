@@ -4,9 +4,10 @@ Countries er en nettside hvor man kan søke, filtrere og sortere på et utvalg a
 
 ## Kjøre prosjektet
 
-1. Klon repoet med SSH/HTTP i ønsket lokasjon
-2. cd frontend og skriv `npm install` deretter `npm start`
-3. cd backend og skriv `npm install` deretter `npm start`
+1. Klon repoet med HTTP i ønsket lokasjon
+2. `cd project-3`, slik at man er inne i project-3 før de neste stegene
+3. I en terminal `cd backend` og skriv `npm install` deretter `npm start`
+4. I en ny terminal `cd frontend` og skriv `npm install` deretter `npm start`
 
 ## Desgin
 
@@ -90,7 +91,7 @@ Vi har benyttet oss av rammeverket cypress for å forenkle automatisert end-2-en
 
 Vi har prøvd å implementere unit tester via både jest og cypress, men lyktes ikke med det og valgte derfor å velge det bort ettersom dette tok mer tid enn nødvenidg og vi føler at end2end testene dekker mye av det samme.
 
-For å kjøre end2end testene skriv `npx cypress open` og velg hvilke test du vil kjøre.
+For å kjøre end2end testene skriv `npx cypress open` og trykk `run all specs` øverst i høyre hjørne.
 
 Gruppen fant ingen ulikheter og siden fungerte optimalt på de nettleserne som ble testet. Testet på chroome, safari og edge
 
