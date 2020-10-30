@@ -35,7 +35,9 @@ const CountryCardContainer: React.FC = () => {
       ) : countryState.error ? (
         <p>{countryState.error}</p>
       ) : (
-        <p>Sorry! No countries match your criteria, try something else</p>
+        <p className="text-center">
+          Sorry...☹☹ No countries match your criteria, try something else! ☺☺☺☺
+        </p>
       )}
     </div>
   );

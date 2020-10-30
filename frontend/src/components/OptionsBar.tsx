@@ -46,12 +46,16 @@ export const OptionsBar = () => {
 
   return (
     <div className="jumbotron p-4 p-md-5 text-secondary rounded bg-ligth text-center">
-      <h1 className="display-4 font-italic">All the countries in the world</h1>
+      <div className="display-4 font-italic">
+        All the countries in the world{" "}
+      </div>
       <p className="lead my-3">
-        Det finnes imidlertid mye å diskutere når man begynner å kikke nærmere
-        på områder rundt omkring i verden. Det er ganske bred enighet om at alle
-        de 193 medlemslandene i FN skal regnes som land. Noen FN-land blir
-        imidlertid ikke anerkjent av enkelte andre FN-land.
+        There are 195 countries in the world today, and on this page you can
+        find almost everyone. You have different options like sort, filter and
+        search, you can also click on the “more detail”-button to see additional
+        information about each country. We hope you will enjoy this page and
+        maybe learn something new. If you want to reset your search push the
+        "Countries"-button in the top left corner.
       </p>
 
       <div className="row">
@@ -77,7 +81,7 @@ export const OptionsBar = () => {
             value={setFilterValue(filterValue.filter)}
             onChange={(e) => dispatch(updateFilter(e.target.value))}
           >
-            <option value=""> All regions </option>
+            <option value=""> All continents </option>
             <option value="Africa">Africa </option>
             <option value="Americas">America</option>
             <option value="Asia">Asia</option>

@@ -37,6 +37,7 @@ const CountryCard: React.FC<ICountry> = ({
     <div className="col-lg-4 mt-4 col-md-6">
       <div className="border border-muted">
         <img
+          onClick={() => dispatch(showDetailedView(name))}
           className="card-img "
           src={flagURL}
           width="250"
@@ -53,7 +54,7 @@ const CountryCard: React.FC<ICountry> = ({
               <strong>Capital: </strong> {capital}
             </li>
             <li className="list-group-item">
-              <strong>Region: </strong> {region}
+              <strong>Continents: </strong> {region}
             </li>
             <li className="list-group-item">
               {" "}
