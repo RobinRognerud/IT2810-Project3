@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { updateSearch } from "../store/ducks/searchDuck";
-import { hideDetailedView } from "../store/ducks/detailedCountry";
+import { hideDetailedView } from "../store/ducks/countryDetailDuck";
 import { updateFilter } from "../store/ducks/filterDuck";
 import { updateSort } from "../store/ducks/sortDuck";
 
@@ -18,14 +18,20 @@ const Header: React.FC = () => {
   }
 
   return (
-    <header>
-      <div className="navbar navbar-dark bg-dark box-shadow mb-4">
-        <div className="container d-flex justify-content-between">
-          <div className="lead text-muted">
-            <button onClick={() => refresh()}>
-              <strong>Countries</strong>
-            </button>
-          </div>
+    <header className="blog-header py-3 border-bottom mb-4">
+      <div className="row flex-nowrap justify-content-between align-items-center">
+        <div className="col text-p1">
+          <button
+            className=" btn btn-link btn-lg text-dark"
+            onClick={() => refresh()}
+          >
+            <strong>
+              <span role="img" aria-label="Globe" aria-labelledby="col text-p1">
+                🌎
+              </span>
+              Countries
+            </strong>
+          </button>
         </div>
       </div>
     </header>

@@ -3,9 +3,9 @@ import Main from "./components/Main";
 
 import { useDispatch, useSelector } from "react-redux";
 import { RootStore } from "./store/rootStore";
-import { GetCountry } from "./store/ducks/countryDuck";
+import { getCountry } from "./store/ducks/countryDuck";
 import Header from "./components/Header";
-import CountryCardDetailed from "./components/CountryCardDetailed";
+import CountryCardDetailed from "./components/CountryCardDetail";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ function App() {
 
   useEffect(() => {
     dispatch(
-      GetCountry(
+      getCountry(
         search.searchTerm,
         detailedView.countryName,
         detialOrMain(),
@@ -38,10 +38,11 @@ function App() {
         filter.filter
       )
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [skip, search, detailedView, like, sort, filter]);
 
   return (
-    <div className="App">
+    <div className="App container">
       <Header />
       {detailedView.show ? <CountryCardDetailed /> : <Main />}
     </div>

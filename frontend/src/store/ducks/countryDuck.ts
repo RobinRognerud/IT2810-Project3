@@ -98,7 +98,7 @@ export const countryReducer = (
  * @param filter specifies by which region the countries should be filtered
  */
 //Action creator
-export function GetCountry(
+export function getCountry(
   searchTerm = "",
   countryName = "",
   skipAmount = 0,

@@ -5,7 +5,7 @@ import { createLogger } from "redux-logger";
 import { countryReducer } from "./ducks/countryDuck";
 import { searchReducer } from "./ducks/searchDuck";
 import { paginationReducer } from "./ducks/paginationDuck";
-import { detailedViewReducer } from "./ducks/detailedCountry";
+import { detailedViewReducer } from "./ducks/countryDetailDuck";
 import { sortReducer } from "./ducks/sortDuck";
 import { filterReducer } from "./ducks/filterDuck";
 import { AppActions } from "./models/actions";

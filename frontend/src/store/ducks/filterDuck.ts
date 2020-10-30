@@ -1,3 +1,6 @@
+import { Dispatch } from "redux";
+import { updateSkipAmount } from "./paginationDuck";
+
 // ACTION
 export const UPDATE_FILTER = "UPDATE_FILTER";
 
@@ -34,8 +37,11 @@ export const filterReducer = (
 
 // ACTION CREATOR
 export const updateFilter = (filter: string) => {
-  return {
-    type: UPDATE_FILTER,
-    filter: filter,
+  return (dispatch: Dispatch) => {
+    dispatch({    
+      type: UPDATE_FILTER,
+      filter: filter,});
+    dispatch(updateSkipAmount("", 0));
   };
+  
 };
