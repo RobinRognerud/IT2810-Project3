@@ -2,6 +2,12 @@
 
 Countries er en nettside hvor man kan søke, filtrere og sortere på et utvalg av verdens land. Vi har valgt å bruke de opplysningene vi synes er mest relevant for denne oppgaven. På siden er det mulig å se ytterligere informasjon om hvert land ved å trykke på “more information”.
 
+## Kjøre prosjektet
+
+1. Klon repoet med SSH/HTTP i ønsket lokasjon
+2. cd frontend og skriv `npm install` deretter `npm start`
+3. cd backend og skriv `npm install` deretter `npm start`
+
 ## Desgin
 
 Vi har valgt å bruke bootstrap til å designe hjemmesiden. Det er ikke laget egne css filer men heller stylet alt ved hjelp av rammeverket til bootstrap. For å style koden er det blitt brukt en blanding av ferdig kode av bootstrap, og egen kode. Et eksempel på kode vi gjenbrukt fra bootstrap, [bootstrap cards](https://getbootstrap.com/docs/4.0/components/card/).
@@ -10,8 +16,9 @@ For blaing har vi brukt knapper for neste og forrige side med 9 land per side. K
 
 ## Backend
 
-Vi installerte MonogDB på NTNU sin virtueller server, der la vi inn data om land generet fra [REST Countries](http://restcountries.eu/#filter-response). Vi brukte denne URL´en [https://restcountries.eu/rest/v2/all?fields=name;capital;region;flag;languages;currencies;population;area](https://restcountries.eu/rest/v2/all?fields=name;capital;region;flag;alpha3code;region;languages;currencies;population;area) og la inn 166 land i databasen. MongoDb passet oss bra ettersom den lagerer data i et JSON-lignende format. Dataen blir lagret i arrays som gjør at databasestrukturen blir intuituv og enklere å jobbe med. I databasen har vi en collection som heter countries. Denne har følgende felt: name, capital, region, flag, languages, currencies, population, area, likes (felt vi har lagt til selv, som holder styr på hvor mange ganger landet har blitt likt)
-Vi implementerte et REST API med Node.js og Express sammen med mongoose (for Mongodb objekt modellering). Vi implementerte to endepunkt ettersom vi fulgte https://restfulapi.net/resource-naming/ sin anbefaling om å bruke query parametere for sortering, filtrering og blaing og dermed ikke trengte flere spesifikke endepunkt. Ut fra dette endepunktet henter vi all informasjon fra databasen:
+Vi installerte MonogDB på NTNU sin virtueller server, der la vi inn data om land generet fra [REST Countries](http://restcountries.eu/#filter-response). Vi brukte denne URL´en [https://restcountries.eu/rest/v2/all?fields=name;capital;region;flag;languages;currencies;population;area](https://restcountries.eu/rest/v2/all?fields=name;capital;region;flag;alpha3code;region;languages;currencies;population;area) og la inn 166 land i databasen. MongoDb passet oss bra ettersom den lagrer data i et JSON-lignende format og dataen blir lagret i arrays som gjør at databasestrukturen blir intuituv og enklere å jobbe med. I databasen har vi en collection som heter countries. Denne har følgende felt: name, capital, region, flag, languages, currencies, population, area og likes (felt vi har lagt til selv, som holder styr på hvor mange ganger landet har blitt likt)
+Vi implementerte et REST API med Node.js og Express sammen med mongoose (for Mongodb objekt modellering). Vi implementerte to endepunkt ettersom vi fulgte https://restfulapi.net/resource-naming/ sin anbefaling om å bruke query parametere for sortering, filtrering og blaing og dermed ikke trengte flere spesifikke endepunkt.
+Fra det første endepunktet henter vi all informasjon fra databasen:
 
 ```
 GET: http://localhost:4000/countries
@@ -27,7 +34,8 @@ GET: http://localhost:4000/countries
 search parameteret brukes også til å hente ut et spesifikt land når _more details_ knappen klikkes og detaljert informasjon vises om et land.
 
 Endepunktet har også en begrensning _limit_ som er satt til å være 9 i backend for å begrense antall returnerte verdier til 9 ettersom dette passet layouten.
-Det andre endeputet er en put for å oppdatere antall likes
+
+Det andre endeputet er en put for å oppdatere antall likes:
 
 ```
 PUT: http://localhost:4000/countries/:countryName
@@ -44,7 +52,7 @@ Prosjektet er basert på React med bruk av Typescript og ble initialisert med: n
 ### Redux
 
 Vi tok i bruk redux for å behandle state, slik at vi fikk en global state som kan brukes hvor som helst i appen uten og bli sendt som props gjennom flere komponenter. Redux gjør også at man slipper callback funksjoner for å sende data oppover i komponenthierarkiet. For eksempel har vi en _more details_ knapp i CountryCard som lar deg se mer detaljert informasjon om det spesifikke landet, når denne trykkes blir _showDetailedView_ kalt som oppdaterer verdier i den globale staten (show til true og spesfiserer hvilket land som skal vises). Dette kan vi så bruke i øverste komponent App ved å hente ut verdien fra den globale store`en.
-Redux består av en store, constants, actions, action creators og reducers. Det er mest utrbredt å plassere dette i egne filer hver for seg, men vi synes dette virket lite skalerbart. Derfor søkte vi etter andre måte og strukturere redux koden og kom over redux ducks, som vil si at man samler alle filene i en modul som omhandler det samme. Redux thunk ble benyttet som middleware for å gjøre kall til databasen.
+Redux består av en store, constants, actions, action creators og reducers. Det er mest utbredt å plassere dette i egne filer hver for seg, men dette virket lite skalerbart. Derfor søkte vi etter andre måte og strukturere redux koden og kom over redux ducks, som vil si at man samler alle filene i en modul som omhandler det samme. Redux thunk ble benyttet som middleware for å gjøre kall til databasen.
 Hver duck er ansvarlig for å styre logikken til en state. Vi har benyttet oss av disse:
 
 | Duck                | Beskrivelse                                                                       | Action Creator                                                                                                                                                                                                                                                                                                                                                                        |
@@ -78,19 +86,12 @@ Footer - Inneholder knappene som tillater blaing
 
 ## Testing
 
+Vi har benyttet oss av rammeverket cypress for å forenkle automatisert end-2-end testing. Grunnen til valget av cypress er at det er enkelt å installere, effektivt og testene gir gode tilbakemeldinger i UI-et. Det er også enkelt å debugge feil, og det er god dokumentasjon som er enkelt å finne. Det er skrevet tester som sjekker de mest brukte og viktigste interaktivitets-muligheten på siden. Vi sjekker ikke alle tilfeller da dette ville tatt for lang tid. Noe av det vi har testet er at input-feltet tar imot og bruker verdier, at filtrering og sortering gir korrekte verdier tilbake og at det fungerer å bla i sider.
+
+For å kjøre test skriv `npx cypress open`
+
 Gruppen fant ingen ulikheter og siden fungerte optimalt på de nettleserne som ble testet. Testet på chroome, safari og edge
 
 ## Git og sammarbeid
 
-Vi fikk tilbakemelding på forrige prosjekt at vi hadde for mange branches og issues. Så denne gangen har vi prøvd å ha issues og branches som rommer større oppgaver. Gruppens erfaring med dette er at det blir en del mer konflikter når man merger.
-
-Vi har brukt brancen dev som master gjennom hele prosjektet, dette er for å ha en fungerende master til en hver tid.
-De fleste merge-konflikter er løst sammen for å få best mulig resultat, og mulighet for å diskutere koden.
-
-Gruppa har møttes jevnlig, og brukt messenger for digital kommunikasjon. Det er alltid vært enighet før noen har merget noe. Vi ser i ettertid at vi kunne vært flinkere til å bruke git sitt rammeverk for kommunikasjon.
-
-Hvert møte har vi avtalt nye issues som man skal jobbe til neste gang. Om noen i gruppe ikke har lykkes med oppgaven har vi benyttet oss av parkoding.
-
-## Videre utvikling
-
-Vi ønsker å vidreutvikle funksjonaliteten til blant annet likes, slik at en bruker kun kan like landet en gang
+Vi fikk tilbakemelding på forrige prosjekt at vi hadde for mange branches og issues. Så denne gangen har vi prøvd å ha issues og branches som rommer større oppgaver. Gruppens erfaring med dette er at det blir en del mer konflikter når man merger. Vi ser i ettertid at vi kunne vært flinkere til å bruke git sitt rammeverk for kommunikasjon. Om noen i gruppe ikke har lykkes med å løse issues har vi benyttet oss av parprogrammering.
