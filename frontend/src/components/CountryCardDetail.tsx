@@ -106,27 +106,25 @@ const CountryCardDetail: React.FC = () => {
           <div className="col-lg-12 mt-4  justify-content-center">
             <div className="card">
               <div className="card-header">
-                <h2 className="card-title mb-2">
-                  {info.name}
-                  <img
-                    className="bd-placeholder-img ml-3"
-                    width="50vw"
-                    height="40vw"
-                    src={info.flag}
-                    alt="Country's flag"
-                  />
+                <h2 className="card-title mb-2">{info.name}</h2>
+                <img
+                  className="bd-placeholder-img ml-3"
+                  width="50vw"
+                  height="40vw"
+                  src={info.flag}
+                  alt="Country's flag"
+                />
 
-                  <button
-                    type="button"
-                    className="close mt-2 mr-4 justify-content-rigth"
-                    aria-label="Close"
-                    onClick={() => dispatch(hideDetailedView())}
-                  >
-                    <span style={{ fontSize: "4vw" }} aria-hidden="true">
-                      &times;
-                    </span>
-                  </button>
-                </h2>
+                <button
+                  type="button"
+                  className="close mt-2 mr-4 justify-content-rigth"
+                  aria-label="Close"
+                  onClick={() => dispatch(hideDetailedView())}
+                >
+                  <span style={{ fontSize: "4vw" }} aria-hidden="true">
+                    &times;
+                  </span>
+                </button>
               </div>
 
               <div className="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative text-center">
