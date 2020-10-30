@@ -62,7 +62,7 @@ export const OptionsBar = () => {
         <div className="d-flex col-lg-4 col-xs-8 mt-1 text-center">
           <select
             className="form-control form-control-lg"
-            id="exampleSelect1"
+            id="sortBar"
             value={setSortValue(sortValue.sort)}
             onChange={(e) => dispatch(updateSort(e.target.value))}
           >
@@ -77,7 +77,7 @@ export const OptionsBar = () => {
         <div className="d-flex .flex-lg-nowrap .flex-xs-wrap col-lg-4 col-xs-8 mt-1 text-center">
           <select
             className="form-control form-control-lg"
-            id="exampleSelect1"
+            id="filterBar"
             value={setFilterValue(filterValue.filter)}
             onChange={(e) => dispatch(updateFilter(e.target.value))}
           >
