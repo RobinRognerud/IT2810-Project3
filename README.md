@@ -1,3 +1,7 @@
+Løsning på prosjekt 3 i Webdev - IT2810. I samarbeid med Siw Døvle og Ragnhild Øie Langåker
+
+
+
 # Project 3
 
 Countries er en nettside hvor man kan søke, filtrere og sortere på et utvalg av verdens land. Vi har valgt å bruke de opplysningene vi synes er mest relevant for denne oppgaven. På siden er det mulig å se ytterligere informasjon om hvert land ved å trykke på “more information”.
